@@ -261,7 +261,7 @@ var $addAll = $(document.createElement('button'))
                     } else {
                         var list = SpellList.getByName(sel);
                         Dialog.close();
-                        spellsToAdd.forEach( function (spellObj) {
+                        fast.forEach(spellsToAdd, function (spellObj) {
                             list.addSpell(spellObj, true);
                         });
                     }
@@ -311,7 +311,7 @@ var $removeAll = $(document.createElement('button'))
                     if (spellsToRemove.length === 1) {
                         inst.deleteSpell(spellsToRemove[0]);
                     } else {
-                        var deleteList = spellsToRemove.map( function (spellObj) {
+                        var deleteList = fast.map(spellsToRemove, function (spellObj) {
                             return spellObj.name;
                         });
                         inst.deleteMany(deleteList);
@@ -354,7 +354,7 @@ $(document).on(':select-spell', function (e) {
     if (e.selected) {
         pool.push(e.spell);
     } else {
-        del = pool.findIndex( function (spell) {
+        del = fast.findIndex(pool, function (spell) {
             return e.spell.name === spell.name;
         });
         pool.deleteAt(del);

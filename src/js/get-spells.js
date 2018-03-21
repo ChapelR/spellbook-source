@@ -47,7 +47,7 @@ function getSpellsByName (name, list) {
     list = getList(list);
     
     name = clean(name);
-    return sortList(list.filter( function (spellObj, idx, arr) {
+    return sortList(fast.filter(list, function (spellObj, idx, arr) {
         var spellName = clean(spellObj.name);
         return spellName.includes(name);
     }), name);
@@ -58,7 +58,7 @@ function getSpellsByTag (tagName, list) {
     list = getList(list);
     
     tagName = clean(tagName);
-    return sortList(list.filter( function (spellObj, idx, arr) {
+    return sortList(fast.filter(list, function (spellObj, idx, arr) {
         var spellTags = spellObj.tags;
         return spellTags.includes(tagName);
     }));
@@ -91,10 +91,10 @@ function getSpellsByComponent (compArray, list) {
         console.warn('Invalid component array in getSpellsByComponent().');
         return list;
     }
-    return sortList(list.filter( function (spellObj, idx, arr) {
+    return sortList(fast.filter(list, function (spellObj, idx, arr) {
         var spellComp = spellObj.components;
         var ret = [];
-        compArray.forEach( function (comp) {
+        fast.forEach(compArray, function (comp) {
             if (spellComp[comp]) {
                 ret.push(true);
             } else {
@@ -114,7 +114,7 @@ function getSpellsBySchool (school, list) {
     if (!school) {
         return list;
     }
-    return sortList(list.filter( function (spellObj, idx, arr) {
+    return sortList(fast.filter(list, function (spellObj, idx, arr) {
         var spellSchool = spellObj.school;
         return school === spellSchool;
     }));
@@ -123,7 +123,7 @@ function getSpellsBySchool (school, list) {
 function getSpellsByRitual (list) {
     list = getList(list);
     
-    return sortList(list.filter( function (spellObj, idx, arr) {
+    return sortList(fast.filter(list, function (spellObj, idx, arr) {
         return spellObj.ritual;
     }));
 }

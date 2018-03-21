@@ -98,7 +98,7 @@ function renderListOfSpells (list, inst) {
     var $wrapper = $(document.createElement('div'))
         .addClass('spell-list-containter');
     
-    list.forEach( function (spell, i, arr) {
+    fast.forEach(list, function (spell, i, arr) {
         $wrapper.append(createSpellListing(spell, inst));
     });
     

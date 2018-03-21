@@ -18,18 +18,18 @@ SpellList.is = function (inst) {
 
 SpellList.add = function (name, tags, spells) {
     var sv = State.variables;
-    sv.lists.push(new SpellList(name, tags, spells));
-    sv.listOfLists.push(name);
+    fast.push(sv.lists, new SpellList(name, tags, spells));
+    fast.push(sv.listOfLists, name);
     return sv.lists[sv.lists.length - 1]; // return the spellbook
 };
 
 SpellList.getByName = function (name, includeIndex) {
     var sv = State.variables, ret,
-        inst = sv.lists.find( function (entry) {
+        inst = fast.find(sv.lists, function (entry) {
             return (entry.name === name);
         });
     if (includeIndex) {
-        var idx = sv.lists.findIndex( function (entry) {
+        var idx = fast.findIndex(sv.lists, function (entry) {
             return (entry.name === name);
         });
         ret = [inst, idx];
@@ -46,7 +46,7 @@ SpellList.search = function (term, list) {
     if (!list || !Array.isArray(list) || list.length < 1 || !SpellList.is(list[0])) {
         list = State.variables.lists;
     }
-    return setup.get.sortList(list.filter( function (list) {
+    return setup.get.sortList(fast.filter(list, function (list) {
         var check = list.name + list.tags.join(' ');
         return check.includesAny(term.split(' '));
     }));
@@ -58,7 +58,7 @@ SpellList.del = function (name) {
     
     sv.lists.deleteAt(del);
     
-    del = sv.listOfLists.indexOf(name);
+    del = fast.indexOf(sv.listOfLists, name);
     
     sv.listOfLists.deleteAt(del);
 };
@@ -71,7 +71,7 @@ SpellList.listify = function (list) {
     var $wrapper = $((document).createElement('span'))
         .addClass('book-wrapper');
     
-    list.forEach( function (book) {
+    fast.forEach(list, function (book) {
         $wrapper.append(book.listing());
     });
     
@@ -146,7 +146,7 @@ SpellList.prototype = {
     rename : function (newName, newTags) {
         // rename a list
         var sv = State.variables,
-            i = sv.listOfLists.indexOf(this.name);
+            i = fast.indexOf(sv.listOfLists, this.name);
         
         sv.listOfLists[i] = newName;
         this.name = newName;
@@ -157,7 +157,7 @@ SpellList.prototype = {
         // bug: only works once!!!
         var ret = false;
         var list = clone(this.spells);
-        list.forEach( function (obj) {
+        fast.forEach(list, function (obj) {
             if (spellObj.name === obj.name) {
                 ret = true;
             }
@@ -172,7 +172,7 @@ SpellList.prototype = {
             }
             return false;
         }
-        this.spells.push(spellObj);
+        fast.push(this.spells, spellObj);
         return true;
     },
     
@@ -182,7 +182,7 @@ SpellList.prototype = {
             return this;
         }
         if (typeof i === 'object') {
-            var del = this.spells.findIndex( function (entry) {
+            var del = fast.findIndex(this.spells, function (entry) {
                 return (i.name === entry.name);
             });
             
@@ -196,7 +196,7 @@ SpellList.prototype = {
         var args = [].slice.call(arguments);
         args = args.flatten();
             
-        var keep = this.spells.filter( function (spellObj) {
+        var keep = fast.filter(this.spells, function (spellObj) {
             return !args.includes(spellObj.name);
         });
         
@@ -257,7 +257,7 @@ SpellList.prototype = {
             $wrapper = $(document.createElement('div'))
                 .addClass('spell-list-containter');
         
-        list.forEach( function (spell, i, arr) {
+        fast.forEach(list, function (spell, i, arr) {
             $wrapper.append(inst.spellListing(i));
         });
         
