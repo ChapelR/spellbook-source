@@ -9,6 +9,7 @@
         <<run spells.render.load(false, '#results', function () { return spells.render.listAll(setup.results); })>>
     <<else>>
         <<timed 40ms>>
+        <<run setup.loading.dismiss()>>
             <<replace '#results'>>No spells match the criteria.<</replace>>
         <</timed>>
     <</if>>
@@ -25,6 +26,7 @@
         <<run spells.render.load(false, '#results', function () { return _list.renderList(); })>>
     <<else>>
         <<timed 40ms>>
+        <<run setup.loading.dismiss()>>
             <<replace '#results'>>No spells match the criteria.<</replace>>
         <</timed>>
     <</if>>

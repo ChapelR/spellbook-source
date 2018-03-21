@@ -8,7 +8,7 @@
     z-index: 20;
     height: 100%;
     width: 100%;
-    background: #fff;
+    background: #111;
 }
 
 .sk-fading-circle {
@@ -32,7 +32,7 @@
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: #333;
+  background-color: #ccc;
   border-radius: 100%;
   -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
           animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
@@ -145,4 +145,11 @@
 @keyframes sk-circleFadeDelay {
   0%, 39%, 100% { opacity: 0; }
   40% { opacity: 1; } 
+}
+
+html.light #loader {
+    background-color: #eee;
+}
+html.light .sk-fading-circle .sk-circle:before {
+    background-color: #333 !important;
 }

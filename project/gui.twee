@@ -1,11 +1,11 @@
 :: StoryInterface [nobr]
 <div id='top-bar'>
     <div id='ui-buttons'>
-        <span id='ui-all' class='ui-button'>
-            <span class='icon load-list'></span>
+        <span id='ui-all' class='ui-button load-list'>
+            <span class='icon'></span>
         </span>
-        <span id='ui-lists' class='ui-button'>
-            <span class='icon load-list'></span>
+        <span id='ui-lists' class='ui-button load-list'>
+            <span class='icon'></span>
         </span>
         <span id='ui-about' class='ui-core'>
             <span class='icon'></span>

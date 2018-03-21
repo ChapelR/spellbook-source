@@ -102,7 +102,7 @@ SpellList.prototype = {
         var displayName = inst.name, 
             displayTags = inst.tags.join(' ');
         if (displayTags.length < 1) {
-            displayTags = ' [ no tags ] ';
+            displayTags = ' [no tags] ';
         }
         
         var $name = $(document.createElement('div'))
@@ -132,6 +132,7 @@ SpellList.prototype = {
                 if ($(e.target).hasClass('card-edit-btn')) {
                     return;
                 }
+                setup.loading.show();
                 State.variables.ctx = inst.name;
                 State.variables.listName = 'Spell Book: ' + inst.name;
                 Engine.play('BookList');

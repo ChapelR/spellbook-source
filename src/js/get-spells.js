@@ -1,5 +1,5 @@
 function getList (arg) {
-    if (!arg || !Array.isArray(arg) || arg.length === 0) {
+    if (!arg || !Array.isArray(arg)) {
         return window.spells.list;
     }
     return arg;

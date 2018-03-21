@@ -117,9 +117,6 @@ function wrapAndRender (sync, target, fn) {
         var $target = toElement(target), 
             $content;
         
-        // give the target the loading element
-        // setup.loading.show(); // attaches to #story and covers it
-        
         if (typeof fn === 'function') {
             $content = fn(); // run the function
         }
@@ -127,7 +124,7 @@ function wrapAndRender (sync, target, fn) {
         setTimeout( function () {
             setup.loading.dismiss();
             $(document).trigger(':render-list-complete');
-        }, 0);
+        }, 10);
     } 
     
     if (sync) {

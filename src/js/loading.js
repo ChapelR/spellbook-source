@@ -6,12 +6,12 @@ var $loader = $(document.createElement('div'))
     .appendTo('#story')
     .hide();
 
-function showLoader (time) {
-    $loader.fadeIn(time);
+function showLoader () {
+    $loader.show();
 }
 
 function hideLoader (time) {
-    $loader.fadeOut(time);
+    $loader.delay(30).fadeOut(time);
 }
 
 setup.loading = {
@@ -20,4 +20,5 @@ setup.loading = {
     dismiss : hideLoader
 };
 
-$(document).on('click', 'load-list', setup.loading.show);
+// bring up loading spinner when the list-view is being loaded
+$(document).on('click', '.load-list, .load-list button', setup.loading.show);
