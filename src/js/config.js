@@ -20,4 +20,4 @@ window.notify = function (msg) {
 			type    : ':notify',
 			message : msg
 		});
-}
+};
