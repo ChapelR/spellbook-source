@@ -1,3 +1,5 @@
+var validProps = ['casting_time', 'range', 'duration'];
+
 function getList (arg) {
     if (!arg || !Array.isArray(arg)) {
         return window.spells.list;
@@ -40,6 +42,15 @@ function sortList (list, term) {
     var ret = clone(list);
     return ret.sort(compare);
     
+}
+
+function getNumberFromString (str) {
+    var num = str.match(/\d/g);
+    if (!num || num.length < 1) {
+        return false;
+    } else {
+        return Number(num.join(''));
+    }
 }
 
 function getSpellsByName (name, list) {
@@ -87,22 +98,25 @@ function getSpellsByComponent (compArray, list) {
     // checklist
     list = getList(list);
     
-    if (!Array.isArray(compArray) && compArray.length < 1) {
+    if (!Array.isArray(compArray) && compArray.length !== 3) {
         console.warn('Invalid component array in getSpellsByComponent().');
         return list;
     }
     return sortList(fast.filter(list, function (spellObj, idx, arr) {
         var spellComp = spellObj.components;
-        var ret = [];
-        fast.forEach(compArray, function (comp) {
-            if (spellComp[comp]) {
-                ret.push(true);
-            } else {
-                ret.push(false);
-            }
-        });
-        if (ret.includes(false)) {
+        if (!compArray[0] && spellComp.verbal) {
             return false;
+        }
+        if (!compArray[1] && spellComp.somatic) {
+            return false;
+        }
+        if (!compArray[2] && spellComp.material) {
+            return false;
+        }
+        if (!compArray[3] && spellComp.materials_needed) {
+            if (spellComp.components.materials_needed.includes(' gp ')) {
+                return false;
+            }
         }
         return true;
     }));
@@ -128,6 +142,113 @@ function getSpellsByRitual (list) {
     }));
 }
 
+function getSpellsByThing (prop, str, list) {
+    list = getList(list);
+    
+    if (!validProps.includes(prop)) {
+        console.warn('invalid propert in getSpellsByThing()');
+        return list;
+    }
+    if (typeof str === 'number') {
+        str = clean(String(str));
+    }
+    return sortList(fast.filter(list, function (spellObj) {
+        var property = clean(spellObj[prop]) + '';
+        return (property.includes(str));
+    }));
+}
+
+function getSpellsByNotThing (prop, avoid, list) {
+    list = getList(list);
+    
+    if (!validProps.includes(prop)) {
+        console.warn('invalid propert in getSpellsByThing()');
+        return list;
+    }
+    return sortList(fast.filter(list, function (spellObj) {
+        var property = clean(spellObj[prop] + '');
+        return (!property.includesAny(avoid));
+    }));
+}
+
+function getSpellsByCastingTime (time, list) {
+    if (typeof time !== 'string') {
+        return list;
+    }
+    if (time === 'other') {
+        return getSpellsByNotThing('casting_time', [
+            '1 action', 
+            '1 bonus action', 
+            '1 reaction'
+        ], list);
+    }
+    return getSpellsByThing('casting_time', time, list);
+}
+
+function getSpellsByRange (range, list) {
+    if (typeof range !== 'string') {
+        return list;
+    }
+    
+    range = clean(range);
+    
+    var rangeNum = getNumberFromString(range);
+    
+    return sortList(fast.filter(list, function (spellObj) {
+        var spellRange = clean(spellObj.range),
+            spellRangeNum = getNumberFromString(spellRange);
+        
+        if (spellRangeNum && rangeNum) {
+            if (range === 'more than 150 feet') {
+                if (spellRangeNum > 150 || spellRange.includes('mile')) {
+                    return true;
+                }
+            } else if (range === 'less than 30 feet' && !spellRange.includes('mile')) {
+                if (spellRangeNum < 30) {
+                    return true;
+                }
+            } else {
+                if (spellRangeNum === rangeNum) {
+                    return true;
+                }
+            }
+        }
+        if (rangeNum) {
+            // add spaces to ensure 30 and 300 aren't conflated
+            return spellRange.includes(' ' + rangeNum + ' ');
+        }
+        return spellRange.includes(range);
+    })); 
+}
+
+function getSpellsByDuration (time, list) {
+    if (typeof time !== 'string') {
+        return list;
+    }
+    if (time === 'other') {
+        return getSpellsByNotThing('casting_time', [
+            'instant', 
+            'concen', 
+            'round', 
+            'minute', 
+            'hour', 
+            'other'
+        ], list);
+    }
+    if (time === 'rounds') {
+        time = 'round';
+    } else if (time === 'minutes') {
+        time = 'minute';
+    } else if (time === 'hours') {
+        time = 'hour';
+    } else if (time === 'concentration') {
+        time = 'concen';
+    }
+    return getSpellsByThing('duration', time, list);
+}
+
+spells.list = sortList(spells.list);
+
 // exports
 window.spells.get = {
     cleanText : clean,
@@ -138,5 +259,10 @@ window.spells.get = {
     byLevel : getSpellsByLevel,
     byComponent : getSpellsByComponent,
     bySchool : getSpellsBySchool,
-    byRitual : getSpellsByRitual
+    byCastingTime : getSpellsByCastingTime,
+    byRange : getSpellsByRange,
+    byDuration : getSpellsByDuration,
+    byRitual : getSpellsByRitual,
+    byThing : getSpellsByThing,
+    byNotThings : getSpellsByNotThing
 };

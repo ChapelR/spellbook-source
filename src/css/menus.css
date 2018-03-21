@@ -44,6 +44,11 @@
     margin: 0.5em 0;
 }
 
+.w100-link-special button {
+    width: 100%;
+    margin: 0.5em 0;
+}
+
 #search {
     color: #555;
 }
@@ -85,4 +90,8 @@
 }
 #delete-button button:hover {
     background-color: #c33;
+}
+
+#ui-dialog-body select.macro-dropdown {
+    min-width: 18em;
 }

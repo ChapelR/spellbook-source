@@ -15,3 +15,17 @@
       <div class="sk-circle12 sk-circle"></div>
     </div>
 </center>
+
+:: Widgets [widget]
+<<widget 'resetFilters'>>\
+    <<silently>>
+    <<set _class to 'any'>>
+    <<set _level to 'any'>>
+    <<set _school to 'any'>>
+    <<set _components to [true, true, true]>>
+    <<set _action to 'any'>>
+    <<set _range to 'any'>>
+    <<set _duration to 'any'>>
+    <<set _ritual to false>>
+    <</silently>>\
+<</widget>>

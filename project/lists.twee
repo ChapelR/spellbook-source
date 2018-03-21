@@ -25,11 +25,11 @@ Tags:
     <<dialog 'Are you sure?'>>
         Are you sure you want to delete <<= _defaults.name>>?
         
-        @@float:right;<<button 'Yes'>>
+        @@float:left;<<button 'Yes'>>
             <<run SpellList.del(_bookToEdit)>>
             <<run Dialog.close()>>
             <<run Engine.play(passage())>>
-        <</button>>@@@@float:left;<<button 'No'>>
+        <</button>>@@@@float:right;<<button 'No'>>
             <<popup 'Edit' 'Edit Spellbook' 'edit-book'>>
         <</button>>@@
     <</dialog>>

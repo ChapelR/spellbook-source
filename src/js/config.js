@@ -12,5 +12,12 @@ Config.saves.onLoad = function (save) {
         delete postdisplay[t];
         Engine.play('Start');
         LoadScreen.unlock(lock);
-    }
+    };
 };
+
+window.notify = function (msg) {
+    $(document).trigger({
+			type    : ':notify',
+			message : msg
+		});
+}

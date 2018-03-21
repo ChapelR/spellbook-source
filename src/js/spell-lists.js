@@ -179,13 +179,14 @@ SpellList.prototype = {
     deleteSpell : function (i /* index or object */) {
         if (typeof i === 'number' && Number.isInteger(i)) {
             this.spells.deleteAt(i);
+            notify('Spell removed.');
             return this;
         }
         if (typeof i === 'object') {
             var del = fast.findIndex(this.spells, function (entry) {
                 return (i.name === entry.name);
             });
-            
+            notify('Spell removed.');
             return this;
         }
         console.warn('Spell "' + i + '" could not be deleted by <spelllist>.deleteSpell().');
@@ -199,7 +200,7 @@ SpellList.prototype = {
         var keep = fast.filter(this.spells, function (spellObj) {
             return !args.includes(spellObj.name);
         });
-        
+        notify('Spell(s) removed.');
         this.spells = keep;
         
         return this;

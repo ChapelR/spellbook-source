@@ -129,17 +129,6 @@ html.light #debug-bar {
     color: #eee;
 }
 
-html.light .message-text {
-    color: #3D9970;
-}
-
-html.light .message-text.open {
-    border-color: #111;
-}
-
-html.light #story .message-text button, html.light #story .message-text.open button { background-color: #3D9970; }
-html.light #story .message-text button:hover, html.light #story .message-text.open button:hover { background-color: #01FF70; color: #111 }
-
 html.light input[type=text], html.light select {
     color: #111;
     background-color: #fff;

@@ -162,7 +162,7 @@ $('#ui-lists').ariaClick({ label : 'Your spell books.' }, function () {
 });
 $('#ui-all').ariaClick({ label : 'All spells.' }, function () {
     $('#story').attr('data-ctx', '');
-    setup.results = spells.get.sort(spells.list);
+    setup.results = spells.list;
     State.variables.listName = 'All Spells';
     Engine.play('Results');
 });
@@ -240,7 +240,7 @@ var $addAll = $(document.createElement('button'))
             spellsToAdd = (st.filtered.length > 0) ? st.filtered : mainList;
         }
         
-        st.listsToShow = sv.listOfLists.filter( function (listName) {
+        st.listsToShow = fast.filter(sv.listOfLists, function (listName) {
             return listName !== sv.ctx;
         });
         
@@ -265,6 +265,7 @@ var $addAll = $(document.createElement('button'))
                             list.addSpell(spellObj, true);
                         });
                     }
+                    notify('Spell(s) added.');
             });
         }
         
@@ -274,7 +275,7 @@ var $addAll = $(document.createElement('button'))
             Dialog.append(addAllConfirm());
             Dialog.open();
         } else {
-            UI.alert('There aren\'t any spells to remove...')
+            notify('No spells...');
         }
     })
     .appendTo('#story');
@@ -317,6 +318,7 @@ var $removeAll = $(document.createElement('button'))
                         inst.deleteMany(deleteList);
                     }
                     Dialog.close();
+                    notify('Spell(s) removed.');
                     Engine.play(passage());
             });
         }
@@ -327,7 +329,7 @@ var $removeAll = $(document.createElement('button'))
             Dialog.append(removeAllConfirm());
             Dialog.open();
         } else {
-            UI.alert('There aren\'t any spells to remove...')
+            notify('No spells...');
         }
     })
     .appendTo('#story');

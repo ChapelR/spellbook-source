@@ -11,20 +11,20 @@ var fast;
         }
     }
     
+    function fastPush (arr, item) {
+        arr[arr.length] = item;
+    }
+    
     function fastFilter (arr, fn) {
         var lt = arr.length,
             ret = [], i;
         
         for (i = 0; i < lt; i++) {
             if (fn(arr[i], i, arr)) {
-                ret.push(arr[i]);
+                fastPush(ret, arr[i]);
             }
         }
         return ret;
-    }
-    
-    function fastPush (arr, item) {
-        arr[arr.length] = item;
     }
     
     function fastMap (arr, fn) {

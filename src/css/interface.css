@@ -23,9 +23,9 @@ textarea {
     margin-bottom: 0;
     padding: 2em 1em;
     width: 10em;
-    background: #eee;
+    background: #bbb;
     color: #111;
-    border-right: 2px solid #fff;
+    border-right: 2px solid #ddd;
     overflow: hidden;
     cursor: pointer;
     z-index: 10;
@@ -54,7 +54,7 @@ textarea {
 }
 
 #caption:hover {
-    background: #fff;
+    background: #ddd;
 }
 
 #caption:hover #caption-link {

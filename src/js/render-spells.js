@@ -45,7 +45,7 @@ function createSpellAddLink (spellObj) {
                     Dialog.close();
                     var check = list.addSpell(spellObj);
                     if (check) { 
-                        UI.alert('Added the ' + spellObj.name + ' to [' + list.name + '].');
+                        notify('Spell added.');
                     }
                 }
             });
