@@ -268,10 +268,14 @@ var $addAll = $(document.createElement('button'))
             });
         }
         
-        Dialog.setup('Add Spells', 'add-selection');
-        Dialog.wiki('Add all of these spells to which list?<br /><br /><<dropdown "_selected" "New book..." _listsToShow>><br /><br />');
-        Dialog.append(addAllConfirm());
-        Dialog.open();
+        if (spellsToAdd.length > 0) {
+            Dialog.setup('Add Spells', 'add-selection');
+            Dialog.wiki('Add all of these spells to which list?<br /><br /><<dropdown "_selected" "New book..." _listsToShow>><br /><br />');
+            Dialog.append(addAllConfirm());
+            Dialog.open();
+        } else {
+            UI.alert('There aren\'t any spells to remove...')
+        }
     })
     .appendTo('#story');
 
@@ -304,18 +308,27 @@ var $removeAll = $(document.createElement('button'))
                 .attr('tabindex', '0')
                 .wiki('Confirm')
                 .ariaClick( function () {
-                    spellsToRemove.forEach( function (spellObj) {
-                        inst.deleteSpell(spellObj);
-                    });
+                    if (spellsToRemove.length === 1) {
+                        inst.deleteSpell(spellsToRemove[0]);
+                    } else {
+                        var deleteList = spellsToRemove.map( function (spellObj) {
+                            return spellObj.name;
+                        });
+                        inst.deleteMany(deleteList);
+                    }
                     Dialog.close();
                     Engine.play(passage());
             });
         }
         
-        Dialog.setup('Remove Spells', 'remove-selection');
-        Dialog.wiki('Remove all of these spells from the list?<br /><br />');
-        Dialog.append(removeAllConfirm());
-        Dialog.open();
+        if (spellsToRemove.length > 0) {
+            Dialog.setup('Remove Spells', 'remove-selection');
+            Dialog.wiki('Remove all of these spells from the list?<br /><br />');
+            Dialog.append(removeAllConfirm());
+            Dialog.open();
+        } else {
+            UI.alert('There aren\'t any spells to remove...')
+        }
     })
     .appendTo('#story');
 
@@ -323,8 +336,8 @@ function showControls () {
     $addAll.removeClass('closed');
     $addAll.empty().wiki('Add all.');
     if (State.variables.ctx) {
-        //$removeAll.removeClass('closed');
-        //$removeAll.empty().wiki('Remove all.');
+        $removeAll.removeClass('closed');
+        $removeAll.empty().wiki('Remove all.');
     }
 }
 function hideControls () {

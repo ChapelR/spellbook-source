@@ -58,10 +58,9 @@ SpellList.del = function (name) {
     
     sv.lists.deleteAt(del);
     
-    del = sv.listOfLists.findIndex( function (entry, idx) {
-        return (entry === name);
-    });
-    sv.listOfLists.deleteAt(del[1]);
+    del = sv.listOfLists.indexOf(name);
+    
+    sv.listOfLists.deleteAt(del);
 };
 
 SpellList.listify = function (list) {
@@ -183,16 +182,26 @@ SpellList.prototype = {
             return this;
         }
         if (typeof i === 'object') {
-            var del = this.spells.find( function (entry, idx) {
-                if (i.name === entry.name) {
-                    return [entry, idx];
-                }
+            var del = this.spells.findIndex( function (entry) {
+                return (i.name === entry.name);
             });
             
-            this.spells.deleteAt(del);
             return this;
         }
         console.warn('Spell "' + i + '" could not be deleted by <spelllist>.deleteSpell().');
+        return this;
+    },
+    
+    deleteMany : function () {
+        var args = [].slice.call(arguments);
+        args = args.flatten();
+            
+        var keep = this.spells.filter( function (spellObj) {
+            return !args.includes(spellObj.name);
+        });
+        
+        this.spells = keep;
+        
         return this;
     },
     
