@@ -8,7 +8,7 @@
         _setName to '', _setTags to ''>>
     <<if _bookToEdit>>
         ''Rename Your Spellbook''
-        <<set _inst to SpellList.getByName(_bookToEdit, true)>>
+        <<set _inst to SpellList.getByName(_bookToEdit)>>
         <<set _defaults to { name : _inst.name, tags : _inst.tags.join(' ') }>>
     <<else>>
         ''Name Your New Spellbook''

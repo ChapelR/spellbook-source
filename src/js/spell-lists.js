@@ -24,13 +24,19 @@ SpellList.add = function (name, tags, spells) {
 };
 
 SpellList.getByName = function (name, includeIndex) {
-    var sv = State.variables,
-        inst = sv.lists.find( function (entry, idx) {
-            if (entry.name === name) {
-                return (includeIndex) ? [entry, idx] : entry;
-            }
+    var sv = State.variables, ret,
+        inst = sv.lists.find( function (entry) {
+            return (entry.name === name);
         });
-    return inst;
+    if (includeIndex) {
+        var idx = sv.lists.findIndex( function (entry) {
+            return (entry.name === name);
+        });
+        ret = [inst, idx];
+    } else {
+        ret = inst;
+    }
+    return ret;
 };
 
 SpellList.search = function (term, list) {
@@ -52,12 +58,9 @@ SpellList.del = function (name) {
     
     sv.lists.deleteAt(del);
     
-    del = sv.listOfLists.find( function (entry, idx) {
-        if (entry === name) {
-            return [entry, idx];
-        }
+    del = sv.listOfLists.findIndex( function (entry, idx) {
+        return (entry === name);
     });
-    
     sv.listOfLists.deleteAt(del[1]);
 };
 
