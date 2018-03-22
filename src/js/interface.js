@@ -201,8 +201,11 @@ var $search = $(document.createElement('input'))
             mainList = setup.results;
         }
         
-        list = (st.filtered.length > 0) ? st.filtered : mainList;
+        list = (st.filtered) ? st.filtered : mainList;
         var result = spells.get.byName(term, list);
+        if (result) {
+            st.filtered = result;
+        }
         if (result.length > 0) {
             if (inst && sv.ctx) {
                 $('#results').empty().append(spells.render.listAll(result, inst));

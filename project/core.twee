@@ -32,7 +32,7 @@ ifid:b0c5ca7d-2dfd-4491-a21a-7694a83cb8e6
             <</link>>?<</replace>>
             <<replace '#list-link'>><</replace>>
         <<else>>
-            <<run SpellList.update('#books', $lists)>>
+            <<run SpellList.update('#books', $lists.randomMany(3))>>
         <</if>>
 <</timed>>
 <</silently>>\
