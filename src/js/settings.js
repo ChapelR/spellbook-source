@@ -10,6 +10,14 @@ function themeHandler () {
     }
 }
 
+function cardViewHandler () {
+    var $html = $(document.documentElement);
+    $html.removeClass('texture');
+    if (!settings.cards) {
+        $html.addClass('texture');
+    }
+}
+
 function fontInit () {
     var $html = $(document.documentElement);
     $html.removeClass('small large very-large');
@@ -60,6 +68,13 @@ Setting.addToggle('theme', {
     label    : 'Night mode:',
     onInit   : themeHandler,
     onChange : themeHandler
+});
+
+Setting.addToggle('cards', {
+    label    : 'Flat spell cards:',
+    default  : true,
+    onInit   : cardViewHandler,
+    onChange : cardViewHandler
 });
 
 Setting.addList('fonts', {

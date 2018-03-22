@@ -17,7 +17,7 @@
 }
 
 .spell-wrapper.checked {
-    border: 4px inset #555;
+    border: 4px solid #eee;
     background-color: #111;
 }
 
@@ -29,7 +29,7 @@
     position: relative;
     padding: 1em;
     overflow: hidden;
-    border: 4px outset #555;
+    border: 4px solid #555;
     background: #222;
     margin: 1em 0;
     cursor: pointer;
@@ -38,7 +38,7 @@
     background-color: #111;
 }
 .spell-wrapper:active {
-    border: 4px inset #555;
+    border: 4px solid #111;
     background-color: #111;
 }
 .spell-name {
@@ -112,12 +112,12 @@ html.light .spell-wrapper:hover {
     background-color: #ddd;
 }
 html.light .spell-wrapper:active {
-    border-color: #ccc;
+    border-color: #111;
     background-color: #ccc;
 }
 
 html.light .spell-wrapper.checked {
-    border-color: #ccc;
+    border-color: #111;
     background-color: #ccc;
 }
 
@@ -125,3 +125,14 @@ html.light .spell-wrapper.checked div.selection {
     background: url(assets/images/checked.svg);
 }
 
+html.texture .spell-wrapper {
+    border-style: outset;
+}
+html.texture .spell-wrapper:active, html.texture .spell-wrapper.checked {
+    border-style: inset;
+    border-color: #555;
+}
+html.light.texture .spell-wrapper:active, html.light.texture .spell-wrapper.checked {
+    border-style: inset;
+    border-color: #ccc;
+}

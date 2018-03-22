@@ -95,3 +95,13 @@
 #ui-dialog-body select.macro-dropdown {
     min-width: 18em;
 }
+
+.inner-image img {
+    height: 2em;
+    width: 2em;
+    display: inline-block;
+}
+
+#version {
+    float: right;
+}

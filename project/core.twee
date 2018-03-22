@@ -46,6 +46,8 @@ ifid:b0c5ca7d-2dfd-4491-a21a-7694a83cb8e6
 :: About [dialog]
 <div id='about-main'>\
     Programmed by Chapel.
+    
+    Spells taken from [[this JSON file|https://github.com/vorpalhex/srd_spells]] by vorpalhex.  Thanks so much!
 </div><div id='about-tools'>
     Powered by [[Twine|http://twinery.org/]], [[Tweego|http://www.motoslave.net/tweego/]], and [[SugarCube|http://www.motoslave.net/sugarcube/]].
 </div><div id='about-licenses'>
@@ -53,3 +55,5 @@ ifid:b0c5ca7d-2dfd-4491-a21a-7694a83cb8e6
     
     For licenses for the supporting software and content, [[click here|https://github.com/ChapelR/spellbook-source/tree/master/licenses]].
 </div>
+<span class='w100-link'><<button [[Changelog]]>><<run Dialog.close()>><</button>></span>
+@@#version;{{{v0.9.1}}}@@
