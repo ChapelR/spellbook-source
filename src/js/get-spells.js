@@ -167,7 +167,9 @@ function getSpellsByNotThing (prop, avoid, list) {
     }
     return sortList(fast.filter(list, function (spellObj) {
         var property = clean(spellObj[prop] + '');
-        return (!property.includesAny(avoid));
+        return !fast.some(avoid, function (item) {
+            return property.includes(item);
+        });
     }));
 }
 
@@ -179,8 +181,15 @@ function getSpellsByCastingTime (time, list) {
         return getSpellsByNotThing('casting_time', [
             '1 action', 
             '1 bonus action', 
-            '1 reaction'
+            '1 reaction',
+            'minute',
+            'hour'
         ], list);
+    }
+    if (time === 'minutes') {
+        time = 'minute';
+    } else if (time === 'hours') {
+        time = 'hour'
     }
     return getSpellsByThing('casting_time', time, list);
 }
@@ -226,7 +235,7 @@ function getSpellsByDuration (time, list) {
         return list;
     }
     if (time === 'other') {
-        return getSpellsByNotThing('casting_time', [
+        return getSpellsByNotThing('duration', [
             'instant', 
             'concen', 
             'round', 

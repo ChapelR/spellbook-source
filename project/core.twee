@@ -13,7 +13,7 @@ ifid:b0c5ca7d-2dfd-4491-a21a-7694a83cb8e6
 <<set setup.levelList to ['any', 'cantrip', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th']>>
 <<set setup.schoolList to ['any', 'abjuration', 'conjuration', 'divination', 'enchantment', 'evocation', 'illusion', 'necromancy', 'transmutation']>>
 <<set setup.componentList to ['verbal', 'somatic', 'material', 'priced material']>>
-<<set setup.actionList to ['any', '1 action', '1 bonus action', '1 reaction', 'other']>>
+<<set setup.actionList to ['any', '1 action', '1 bonus action', '1 reaction', 'minutes', 'hours']>>
 <<set setup.rangeList to ['any', 'self', 'touch', 'sight', 'less than 30 feet', '30 feet', '60 feet', '90 feet', '100 feet', '120 feet', '150 feet', 'more than 150 feet']>>
 <<set setup.durationList to ['any', 'instant', 'concentration', 'rounds', 'minutes', 'hours', 'other']>> 
 

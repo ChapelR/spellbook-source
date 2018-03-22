@@ -69,6 +69,30 @@
         return -1;
     }
     
+    function fastSome (arr, fn) {
+        var lt = arr.length, i;
+        
+        for (i = 0; i < lt; i++) {
+            if (fn(arr[i], i, arr)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    function fastEvery (arr, fn) {
+        var lt = arr.length, i;
+        
+        for (i = 0; i < lt; i++) {
+            if (!fn(arr[i], i, arr)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     exp.fast = {
         filter : fastFilter,
         forEach : fastForEach,
@@ -76,7 +100,9 @@
         map : fastMap,
         indexOf : fastIndexOf,
         find : fastFind,
-        findIndex: fastFindIndex
+        findIndex: fastFindIndex,
+        some : fastSome,
+        every : fastEvery
     };
     
     

@@ -32,7 +32,7 @@ div.book-listing.card:hover .card-name {
 div.book-listing.card-edit-btn {
     cursor: pointer;
     position: relative;
-    bottom: 0;
+    bottom: -0.5px;
     z-index: 3;
     margin: 1em -1em -1em;
     background: url(assets/images/edit.svg) no-repeat #111;
