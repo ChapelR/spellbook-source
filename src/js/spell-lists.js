@@ -1,12 +1,14 @@
 State.variables.lists = [];
 State.variables.listOfLists = [];
 
-window.SpellList = function (name, tags, spellArray) {
+window.SpellList = function (name, tags, spellArray, accessed) {
     if (this instanceof SpellList) {
-        this.name = name;
-        this.tags = tags || [];
-        this.spells = spellArray || [];
+        this.name = name; // the *unique* name of the spellbook, used for display and for identifying the book internally
+        this.tags = tags || []; // along with name, tags will probably eventually be searchable in the book-view
+        this.spells = spellArray || []; // the main attraction
+        this.access = accessed || Date.now(); // auto-assign except when cloned or deserialized
     } else {
+        // add new if this constructor was called without it
         return new SpellList(name, tags, spellArray);
     }
 };
@@ -20,6 +22,7 @@ SpellList.add = function (name, tags, spells) {
     var sv = State.variables;
     fast.push(sv.lists, new SpellList(name, tags, spells));
     fast.push(sv.listOfLists, name);
+    $(document).trigger(':new-book');
     return sv.lists[sv.lists.length - 1]; // return the spellbook
 };
 
@@ -37,6 +40,29 @@ SpellList.getByName = function (name, includeIndex) {
         ret = inst;
     }
     return ret;
+};
+
+SpellList.isAccessed = function (name) {
+    var inst = SpellList.getByName(name);
+    if (inst && SpellList.is(inst)) {
+        inst.access = Date.now();
+    }
+};
+
+SpellList.sortByAccess = function () {
+    var sv = State.variables;
+    
+    function compare (a, b) {
+        if (a.access < b.access) {
+            return 1;
+        }
+        if (a.access > b.access) {
+            return -1;
+        }
+        return 0;
+    }
+    
+    sv.lists.sort(compare);
 };
 
 SpellList.search = function (term, list) {
@@ -136,6 +162,10 @@ SpellList.prototype = {
                     return;
                 }
                 setup.loading.show();
+                $(document).trigger({
+                    type : ':access-book',
+                    inst : inst
+                });
                 State.variables.ctx = inst.name;
                 State.variables.listName = 'Spell Book: ' + inst.name;
                 Engine.play('BookList');
@@ -174,6 +204,10 @@ SpellList.prototype = {
             return false;
         }
         fast.push(this.spells, spellObj);
+        $(document).trigger({
+            type : ':access-book',
+            inst : this
+        });
         return true;
     },
     
@@ -206,6 +240,10 @@ SpellList.prototype = {
         this.spells = keep;
         
         return this;
+    },
+    
+    updateAccess : function () {
+        this.access = Date.now();
     },
     
     spellDescriptionLink : function (idx, el) {
@@ -275,11 +313,40 @@ SpellList.prototype = {
     // for SugarCube's state system
     constructor : window.SpellList,
     toJSON : function () {
-        return JSON.reviveWrapper('new SpellList(' + JSON.stringify(this.name) + ', ' + JSON.stringify(this.tags) + ',' + JSON.stringify(this.spells) + ')');
+        return JSON.reviveWrapper('new SpellList(' + JSON.stringify(this.name) + ', ' + JSON.stringify(this.tags) + ', ' + JSON.stringify(this.spells) + ', ' + JSON.stringify(this.access) + ')');
     },
     clone : function () {
-        return new SpellList(this.name, this.tags, this.spells);
+        return new SpellList(this.name, this.tags, this.spells, this.access);
     }
 };
 
-// SpellList.add('default', [spells.list[0], spells.list[10]]);
+// update spell book order
+prerender['update-list-order'] = function () {
+    SpellList.sortByAccess();
+};
+
+// handle access events
+$(document).on(':access-book', function (e) {
+    if (typeof e.inst === 'string') {
+        SpellList.isAccessed(inst);
+    } else if (typeof e.inst === 'object' && e.inst.hasOwnProperty('spells')) {
+        e.inst.updateAccess();
+    } else {
+        console.warn('Event ":access-book" triggered with invalid event object: ', e.inst);
+    }
+});
+
+$(document).on(':new-book', function (e) {
+    notify('Spellbook added!');
+    if (State.variables.listOfLists.length === 100 && passage() !== 'Import') {
+        UI.alert("You just made your 100th spellbook.  Congratulations!\n\nIf you begin to experience lag or unresponsiveness, deleting old spellbooks may help.");
+    } else if (State.variables.listOfLists.length === 200 && passage() !== 'Import') {
+        UI.alert("You just made your 200th spellbook.  Congratulations!\n\nIf you begin to experience lag or unresponsiveness, deleting old spellbooks may help.");
+    } else if (State.variables.listOfLists.length === 300 && passage() !== 'Import') {
+        UI.alert("You just made your 300th spellbook.  Congratulations!\n\nIf you begin to experience lag or unresponsiveness, deleting old spellbooks may help.");
+    } else if (State.variables.listOfLists.length === 500 && passage() !== 'Import') {
+        UI.alert("You just made your 500th spellbook.  Congratulations!\n\nIf you begin to experience lag or unresponsiveness, deleting old spellbooks may help.");
+    } else if (State.variables.listOfLists.length === 1000 && passage() !== 'Import') {
+        UI.alert("You just made your 1000th spellbook.\n\nHOW IS YOUR BROWSER STILL RUNNING?");
+    }
+});

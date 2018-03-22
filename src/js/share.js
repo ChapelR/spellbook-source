@@ -69,6 +69,20 @@ function parseList (json) {
 
 function reconfigure (obj) {
     try {
+        var sv = State.variables;
+        if (sv.listOfLists.includes(obj.n)) {
+            var i, okayName;
+            for (i = 2; i < 100; i++) {
+                okayName = obj.n + ' (' + i + ')';
+                if (!sv.listOfLists.includes(okayName)) {
+                    break;
+                }
+            }
+            if (sv.listOfLists.includes(okayName)) {
+                okayName = 'spellbook-' + (Math.random() + 1).toString(36).substring(7) + '-' + Date.now();
+            }
+            obj.n = okayName;
+        }
         return SpellList.add(obj.n, obj.t.split(' '), obj.s);
     } catch (e) {
         console.error(e);

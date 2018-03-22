@@ -189,7 +189,7 @@ function getSpellsByCastingTime (time, list) {
     if (time === 'minutes') {
         time = 'minute';
     } else if (time === 'hours') {
-        time = 'hour'
+        time = 'hour';
     }
     return getSpellsByThing('casting_time', time, list);
 }

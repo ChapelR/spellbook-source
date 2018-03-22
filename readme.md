@@ -2,7 +2,7 @@ This is the source code for my [spellbook app](https://chapelr.github.io/spellbo
 
 ### Building From Source
 
-To build the app from source, you'll need [Tweego](http://www.motoslave.net/tweego/#downloads) (> v1.3.0) and [SugarCube](http://www.motoslave.net/sugarcube/2/#downloads) (> v2.24.0).  You'll also need [Node.js](https://nodejs.org/en/).
+To build the app from source, you'll need [Tweego](http://www.motoslave.net/tweego/#downloads) (>= v1.3.0) and [SugarCube](http://www.motoslave.net/sugarcube/2/#downloads) (>= v2.24.0).  You'll also need [Node.js](https://nodejs.org/en/).
 
 Get Tweego installed and point it toward SugarCube.  If you aren't sure how, you can just place the Tweego binary in the directory with the repo.  You can place the `sugarcube-2` folder inside a directory called `story-formats` in the same place, and everything should work.
 

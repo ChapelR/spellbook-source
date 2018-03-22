@@ -1,5 +1,8 @@
 :: Changelog [notes]
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/changelog.svg]]@@ @@#menu-text;Patch Notes@@</span>
+!!! 0.9.3: Beta patch 3
+* Spellbooks are now automatically ordered based on access: spellbooks you use more will stay at the top of the list and spellbooks you use less will sink to the bottom.  Opening a spellbook and adding spells to a spellbook count as accessing it (removing spells doesn't, but you can't remove spells without opening it, so...).  Creating a new spellbook also counts as "accessing" it for the purposes of this system.  Editing a spellbook's name or tags does not count, however.
+
 !!! 0.9.2: Beta patch 2
 * Fixed bug in the search feature where deleting letters would not un-narrow the search.
 * Fixed issue where dropdown boxes would flash wildly in night mode, though it was fixed by making these input elements white across both modes.
