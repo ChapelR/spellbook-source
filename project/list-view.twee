@@ -66,6 +66,9 @@
 <hr />\
 <</message>></span>
 <span id='space-link' class='w100-link'><<button 'Confirm'>>
+    /% reset search term cache %/
+    <<set _termFiltered to false>>
+    
     <<if $ctx>>
         <<set _filtered to clone(_list.spells)>>
     <<else>>

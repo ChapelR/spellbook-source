@@ -1,8 +1,10 @@
 :: Changelog [notes]
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/changelog.svg]]@@ @@#menu-text;Patch Notes@@</span>
 !!! 0.9.1: Beta patch 1
+* Fixed bug in the search feature where deleting letters would not un-narrow the search.
 * Added setting to 'flatten' the appearance of the spell cards, making them look a bit less like buttons.  This new option is on by default.  Press the @@.inner-image;[img[assets/images/settings.svg]]@@ icon to configure this new setting to your liking.
+* Added option to 'slim' the side dock to give the user more screen real-estate.  Only has an effect on larger screens.
 * Disabled zooming on mobile devices.  This should make the app feel much more responsive and prevent the 'sliding around' effect of some UI elements when scrolling on mobile.  You can still adjust the size of the apps's text and presentation by adjusting the font-size option in the settings menu.
 * Added the Open Gaming License to the license list.
 * Added credit to [[vorpalhex|https://github.com/vorpalhex/srd_spells]] in About modal.
-* Added this changelog and a version number to the About modal.
+* Other minor appearance and UI updates.

@@ -202,10 +202,17 @@ var $search = $(document.createElement('input'))
         }
         
         list = (st.filtered) ? st.filtered : mainList;
-        var result = spells.get.byName(term, list);
-        if (result) {
-            st.filtered = result;
-        }
+        
+        if (!st.termFiltered) { // update cache when external filters change
+            var cache = clone(list);
+            st.termFiltered = true;
+        } 
+        
+        // always search from the cache
+        var result = spells.get.byName(term, cache);
+        
+        st.filtered = result;
+        
         if (result.length > 0) {
             if (inst && sv.ctx) {
                 $('#results').empty().append(spells.render.listAll(result, inst));
@@ -380,6 +387,7 @@ $(document).on(':select-spell', function (e) {
 postdisplay['show-goodies'] = function (t) {
     if (tags().includes('list-view')) {
         $('#bottom-bar').show();
+        $('#search').val('Search...'); // reset search term on load
         showControls();
     } else {
         $('#bottom-bar').hide();
