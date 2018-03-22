@@ -204,13 +204,12 @@ var $search = $(document.createElement('input'))
         list = (st.filtered) ? st.filtered : mainList;
         
         if (!st.termFiltered) { // update cache when external filters change
-            var cache = clone(list);
+            st.cache = clone(list);
             st.termFiltered = true;
         } 
         
         // always search from the cache
-        var result = spells.get.byName(term, cache);
-        
+        var result = spells.get.byName(term, st.cache);
         st.filtered = result;
         
         if (result.length > 0) {
