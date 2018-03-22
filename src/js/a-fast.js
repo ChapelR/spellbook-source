@@ -1,6 +1,4 @@
 // fast array methods to squeeze out better performance
-var fast;
-
 (function (exp) {
     
     function fastForEach (arr, fn) {
@@ -42,7 +40,7 @@ var fast;
         var lt = arr.length, i;
         
         for (i = 0; i < lt; i++) {
-            if (arr[i] === target) {
+            if (arr[i] === item) {
                 return i;
             }
         }
@@ -71,7 +69,7 @@ var fast;
         return -1;
     }
     
-    fast = {
+    exp.fast = {
         filter : fastFilter,
         forEach : fastForEach,
         push : fastPush,
@@ -82,6 +80,4 @@ var fast;
     };
     
     
-}(fast));
-
-window.fast = fast;
+}(window));

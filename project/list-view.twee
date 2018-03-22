@@ -1,7 +1,7 @@
 :: Results [list-view]
 <<set $ctx to ''>>\
 <<resetFilters>>\
-<<set _filtered to []>>\
+<<set _filtered to null>>\
 /% additional info (like book name if applicable)%/\
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/all.svg]]@@ @@#menu-text;$listName@@</span>
 <span id='results'></span>
@@ -19,7 +19,7 @@
 :: BookList [list-view]
 <<set _list to SpellList.getByName($ctx)>>\
 <<resetFilters>>\
-<<set _filtered to []>>\
+<<set _filtered to null>>\
 /% additional info (like book name if applicable)%/\
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/all.svg]]@@ @@#menu-text;$listName@@</span>
 <span id='results'></span>

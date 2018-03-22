@@ -118,6 +118,7 @@ SpellList.prototype = {
         var $edit = $(document.createElement('div'))
             .addClass('book-listing card-edit-btn')
             .attr('data-book', inst.name)
+            .wiki('[EDIT]')
             .ariaClick({ label : 'Change spell book information.' }, function () {
                 State.temporary.bookToEdit = inst.name;
                 State.temporary.spellToAdd = false;
@@ -186,6 +187,7 @@ SpellList.prototype = {
             var del = fast.findIndex(this.spells, function (entry) {
                 return (i.name === entry.name);
             });
+            this.spells.deleteAt(del);
             notify('Spell removed.');
             return this;
         }

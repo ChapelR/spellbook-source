@@ -237,7 +237,7 @@ var $addAll = $(document.createElement('button'))
         if (st.selectedSpells && Array.isArray(st.selectedSpells) && st.selectedSpells.length > 0) {
             spellsToAdd = st.selectedSpells;
         } else {
-            spellsToAdd = (st.filtered.length > 0) ? st.filtered : mainList;
+            spellsToAdd = (st.filtered && Array.isArray(st.filtered)) ? st.filtered : mainList;
         }
         
         st.listsToShow = fast.filter(sv.listOfLists, function (listName) {
@@ -300,7 +300,7 @@ var $removeAll = $(document.createElement('button'))
         if (st.selectedSpells && Array.isArray(st.selectedSpells) && st.selectedSpells.length > 0) {
             spellsToRemove = st.selectedSpells;
         } else {
-            spellsToRemove = (st.filtered.length > 0) ? st.filtered : mainList;
+            spellsToRemove = (st.filtered && Array.isArray(st.filtered)) ? st.filtered : mainList;
         }
         
         function removeAllConfirm () {

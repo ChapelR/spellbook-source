@@ -32,26 +32,28 @@ div.book-listing.card:hover .card-name {
 div.book-listing.card-edit-btn {
     cursor: pointer;
     position: relative;
-    bottom: 4.5em;
-    right: -1em;
-    float: right;
+    bottom: 0;
     z-index: 3;
-    padding-top: 2.5em;
-    background: url(assets/images/edit.svg);
-    background-repeat: no-repeat;
-    background-color: #111;
-    width: 3em;
+    margin: 1em -1em -1em;
+    background: url(assets/images/edit.svg) no-repeat #111;
     height: 3em;
-    opacity: 0.9;
+    border-left: 2em solid #111;
+    opacity: .9;
+    color: #eee;
+    letter-spacing: 0.2em;
+    padding-left: 5em;
+    vertical-align: middle;
+    line-height: 3em;
     overflow: hidden;
-    transition: border 300ms;
-    -webkit-transition: border 300ms;
-    -moz-transition: border 300ms;
-    -o-transition: border 300ms;
+    transition: border .3s;
+    -webkit-transition: border .3s;
+    -moz-transition: border .3s;
+    -o-transition: border .3s;
 }
 div.book-listing.card-edit-btn:hover {
     opacity: 1;
-    border-left: 1.8em solid #111;
+    border-left: 3em solid #111;
+    font-weight: bold;
 }
 
 html.light .book-listing.card {
