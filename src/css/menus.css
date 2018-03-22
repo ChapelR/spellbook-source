@@ -106,3 +106,12 @@
     float: right;
     color: lime;
 }
+
+input[type=text], select {
+    background-color: #fff;
+    color: #111;
+}
+
+input[type=text]:hover, select:hover, input[type=text]:focus, select:focus, input[type=text]:active, select:active {
+    background-color: #fff !important;
+}

@@ -1,5 +1,8 @@
 :: Changelog [notes]
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/changelog.svg]]@@ @@#menu-text;Patch Notes@@</span>
+!!! 0.9.2: Beta patch 2
+* Fixed issue where dropdown boxes would flash wildly in night mode, though it was fixed by making these input elements white across both modes.
+
 !!! 0.9.1: Beta patch 1
 * Fixed bug in the search feature where deleting letters would not un-narrow the search.
 * Added setting to 'flatten' the appearance of the spell cards, making them look a bit less like buttons.  This new option is on by default.  Press the @@.inner-image;[img[assets/images/settings.svg]]@@ icon to configure this new setting to your liking.
