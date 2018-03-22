@@ -386,3 +386,13 @@ postdisplay['show-goodies'] = function (t) {
         hideControls();
     }
 };
+
+// soft reset
+$(document).on('keyup', function (e) {
+    if (e.shiftKey && e.ctrlKey && e.which == 88) { // ctrl + shift + x 
+        Engine.restart(); // restart
+    }
+    if (e.shiftKey && e.ctrlKey && e.which == 90) { // ctrl + shift + z 
+        Engine.play('Start'); // go to landing page
+    }
+});

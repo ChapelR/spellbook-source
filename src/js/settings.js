@@ -18,6 +18,14 @@ function cardViewHandler () {
     }
 }
 
+function slimCaptionHandler () {
+    var $html = $(document.documentElement);
+    $html.removeClass('slim');
+    if (settings.caption) {
+        $html.addClass('slim');
+    }
+}
+
 function fontInit () {
     var $html = $(document.documentElement);
     $html.removeClass('small large very-large');
@@ -75,6 +83,12 @@ Setting.addToggle('cards', {
     default  : true,
     onInit   : cardViewHandler,
     onChange : cardViewHandler
+});
+
+Setting.addToggle('caption', {
+    label    : 'Slim dock:',
+    onInit   : slimCaptionHandler,
+    onChange : slimCaptionHandler
 });
 
 Setting.addList('fonts', {

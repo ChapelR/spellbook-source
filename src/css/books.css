@@ -3,7 +3,6 @@
 div.book-listing.card {
     cursor: pointer;
     color: #111;
-    border: 1px solid #ccc;
     background-color: #bbb;
     padding: 1em;
     margin: 1em;
@@ -38,7 +37,7 @@ div.book-listing.card-edit-btn {
     background: url(assets/images/edit.svg) no-repeat #111;
     height: 3em;
     border-left: 2em solid #111;
-    opacity: .9;
+    opacity: 0.9;
     color: #eee;
     letter-spacing: 0.2em;
     padding-left: 5em;
@@ -51,13 +50,17 @@ div.book-listing.card-edit-btn {
     -o-transition: border .3s;
 }
 div.book-listing.card-edit-btn:hover {
-    opacity: 1;
+    opacity: 0.7;
     border-left: 3em solid #111;
     font-weight: bold;
 }
 
+html.light div.book-listing.card-edit-btn:hover {
+    opacity: 1;
+}
+
 html.light .book-listing.card {
-    border-color: #111;
+    border: 1px solid #111;
     background-color: #fff;
 }
 html.light .book-listing.card:hover {

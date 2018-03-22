@@ -147,3 +147,15 @@ html.light input:hover, html.light input:focus {
 html.light input#gender-slider:focus, html.light input#gender-slider:hover {
     background-color: #fff;
 }
+
+@media screen and (min-width: 801px) {
+    html.slim #caption {
+        width: 4em;
+    }
+    html.slim #caption-text {
+        transform: none;
+    }
+    html.slim #caption-link {
+        transform: rotate(270deg);
+    }
+}
