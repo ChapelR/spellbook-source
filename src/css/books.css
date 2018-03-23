@@ -6,9 +6,13 @@ div.book-listing.card {
     background-color: #bbb;
     padding: 1em;
     margin: 1em;
+    -webkit-transition-duration : 0.3s;
+    -moz-transition-duration : 0.3s;
+    -o-transition-duration : 0.3s;
+    transition-duration : 0.3s;
 }
-div.book-listing.card:hover {
-    background-color: #ccc;
+div.book-listing.card:hover, div.book-listing.card:active {
+    margin: 1em 0;
 }
 div.book-listing.card:hover .card-name {
     text-decoration: underline;
@@ -60,9 +64,5 @@ html.light div.book-listing.card-edit-btn:hover {
 }
 
 html.light .book-listing.card {
-    border: 1px solid #111;
     background-color: #fff;
-}
-html.light .book-listing.card:hover {
-    background-color: #ccc;
 }
