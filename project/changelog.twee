@@ -11,7 +11,7 @@ AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
 
 %/\
 !!! 0.9.5: Beta patch 4
-* The UI has been improved to better match material design standards.
+* Several minor to moderate UI improvements.
 * The import/export feature now supports the file system, meaning you can save and load spellbooks to and from your hard disk, rather than copying and pasting all that fiddly gibberish.
 
 !!! 0.9.3: Beta patch 3
