@@ -12,7 +12,7 @@ AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
 !!! 0.9.6: Beta patch 5
 * Added [[Google Analytics|https://www.google.com/analytics/]].
 * Compression for spellbook files has been increased by an almost comical amount (a file containing all spells has gone from 163 KB to 1 KB).  Unfortunately, old spellbook files are no longer importable.  This compression takes a second or two, so the app may hang for a moment when you export or import, though not enough to warrant a load screen.  A worthy trade.
-* UI improvements.  Made some minor adjustments to the UI's appearance, paritcularly on mobiles.
+* UI improvements.  Made some minor adjustments to the UI's appearance, particularly on mobiles.
 * Built some plumbing for custom spells, but the feature isn't fully implemented yet.
 
 !!! 0.9.5: Beta patch 4
