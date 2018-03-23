@@ -1,11 +1,43 @@
 // export
 
+function compressSpells (list) {
+    try {
+        var start = performance.now();
+        var ret = fast.map(list, function (spellObj) {
+            return fast.findIndex(spells.list, function (mainListObj) {
+                return (spellObj.name === mainListObj.name);
+            });
+        });
+        var time = performance.now() - start;
+        console.log('performance: ', time, ret);
+        return ret;
+    } catch (err) {
+        console.error(err);
+        UI.alert('Something went wrong.  Error code: [newt].');
+    } 
+}
+
+function decompressSpells (list) {
+    try {
+        var start = performance.now();
+        var ret = fast.map(list, function (idx) {
+            return spells.list[idx];
+        });
+        var time = performance.now() - start;
+        console.log('performance: ', time, ret);
+        return ret;
+    } catch (err) {
+        console.error(err);
+        UI.alert('Something went wrong.  Error code: [ostrich].');
+    } 
+}
+
 function wrapUp (list) {
     try {
         return {
             n : list.name,
             t : list.tags.join(' '),
-            s : list.spells
+            s : compressSpells(list.spells) // new
         };
     } catch (e) {
         console.error(e);
@@ -83,6 +115,7 @@ function reconfigure (obj) {
             }
             obj.n = okayName;
         }
+        obj.s = decompressSpells(obj.s); // new
         return SpellList.add(obj.n, obj.t.split(' '), obj.s);
     } catch (e) {
         console.error(e);
@@ -143,7 +176,7 @@ function loadFromFile (e) {
         
     } catch (err) {
         console.error(err);
-        UI.alert('Something went wrong.  Error code: [monkey].');
+        UI.alert('Something went wrong.  Error code: [moose].');
     }
 }
 
