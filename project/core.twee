@@ -56,4 +56,4 @@ ifid:b0c5ca7d-2dfd-4491-a21a-7694a83cb8e6
     For licenses for the supporting software and content, [[click here|https://github.com/ChapelR/spellbook-source/tree/master/licenses]].
 </div>
 <span class='w100-link'><<button [[Changelog]]>><<run Dialog.close()>><</button>></span>
-@@#version;{{{v0.9.2 - Beta}}}@@
+@@#version;{{{v0.9.3 - Beta}}}@@

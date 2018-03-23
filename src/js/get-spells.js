@@ -114,9 +114,11 @@ function getSpellsByComponent (compArray, list) {
             return false;
         }
         if (!compArray[3] && spellComp.materials_needed) {
-            if (spellComp.components.materials_needed.includes(' gp ')) {
-                return false;
-            }
+            return fast.some(spellComp.materials_needed, function (line) {
+                line = clean(line);
+                return !(getNumberFromString(line) && 
+                    (line.includes('gp') || line.includes('gold')));
+            });
         }
         return true;
     }));
