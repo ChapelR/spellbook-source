@@ -1,0 +1,34 @@
+:: Custom [custom-view]
+/% the custom spell list view %/\
+<<link 'Create'>><<run setup.custom.dialog(true)>><</link>>
+
+:: Custom Edit [custom-spell dialog]
+/% create a new custom spell / edit existing custom spells %/\
+<<set _classes to []>><<set _pricedComp to (_components && _components[3]) ? _components[3] : ''>>\
+''Classes (check all that apply):''
+* <label>Bard: <<checkbox '_bard' false true>></label>
+* <label>Cleric: <<checkbox '_cleric' false true>></label>
+* <label>Druid: <<checkbox '_druid' false true>></label>
+* <label>Paladin: <<checkbox '_paladin' false true>></label>
+* <label>Ranger: <<checkbox '_ranger' false true>></label>
+* <label>Sorcerer: <<checkbox '_sorcerer' false true>></label>
+* <label>Warlock: <<checkbox '_warlock' false true>></label>
+* <label>Wizard: <<checkbox '_wizard' false true>></label>
+
+''School:''
+<<dropdown '_school' setup.schoolList.slice(1)>>
+
+''Components:''
+* <label>Verbal: <<checkbox '_components[0]' false true>></label>
+* <label>Somatic: <<checkbox '_components[1]' false true>></label>
+* <label>Material: <<checkbox '_components[2]' false true>></label> 
+<label>Specific Material(s): 
+<<textbox '_components[3]' _pricedComp>></label>
+
+<label>''Ritual:'' <<checkbox '_ritual' false true>></label>
+
+:: Custom Confirm [custom-spell dialog]
+/% a confirm button for the custom spell edit dialog %/\
+<span class='w100-link' id='enter-link'><<button 'Confirm'>>
+    /% build spell %/
+<</button>></span>

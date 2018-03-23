@@ -402,4 +402,7 @@ $(document).on('keyup', function (e) {
     if (e.shiftKey && e.ctrlKey && e.which == 90) { // ctrl + shift + z 
         Engine.play('Start'); // go to landing page
     }
+    if (e.shiftKey && e.ctrlKey && e.which == 13) { // ctrl + shift + enter 
+        Engine.play('Custom'); // go to custom spell page (test)
+    }
 });

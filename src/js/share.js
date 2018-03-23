@@ -2,15 +2,11 @@
 
 function compressSpells (list) {
     try {
-        var start = performance.now();
-        var ret = fast.map(list, function (spellObj) {
+        return fast.map(list, function (spellObj) {
             return fast.findIndex(spells.list, function (mainListObj) {
                 return (spellObj.name === mainListObj.name);
             });
         });
-        var time = performance.now() - start;
-        console.log('performance: ', time, ret);
-        return ret;
     } catch (err) {
         console.error(err);
         UI.alert('Something went wrong.  Error code: [newt].');
@@ -19,13 +15,9 @@ function compressSpells (list) {
 
 function decompressSpells (list) {
     try {
-        var start = performance.now();
-        var ret = fast.map(list, function (idx) {
+        return fast.map(list, function (idx) {
             return spells.list[idx];
         });
-        var time = performance.now() - start;
-        console.log('performance: ', time, ret);
-        return ret;
     } catch (err) {
         console.error(err);
         UI.alert('Something went wrong.  Error code: [ostrich].');
