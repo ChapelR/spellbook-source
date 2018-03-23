@@ -106,7 +106,7 @@ function importSpellbook (data /* string */) {
 
 function saveToFile (bookName, string) {
     try {
-        saveName = Util.slugify(bookName) + '.spells';
+        var saveName = Util.slugify(bookName) + '.spells';
         saveAs(new Blob([string], { type : 'text/plain;charset=UTF-8'}), saveName);
     } catch (err) {
         console.error(err);
@@ -125,7 +125,7 @@ function loadFromFile (e) {
                     return;
                 }
                 
-                list = SpellList.importList(target.result);
+                var list = SpellList.importList(target.result);
                 State.temporary.bookToEdit = list.name;
                 State.temporary.spellToAdd = false;
                 Dialog.setup('Edit Spellbook', 'edit-book');
@@ -149,5 +149,9 @@ function loadFromFile (e) {
 
 setup.share = {
     importFromString : importSpellbook,
-    exportToString : exportSpellbook
+    exportToString : exportSpellbook,
+    save : saveToFile,
+    load : loadFromFile
 };
+
+$(document).on('change', 'input#file-upload', loadFromFile);

@@ -1,5 +1,19 @@
 :: Changelog [notes]
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/changelog.svg]]@@ @@#menu-text;Patch Notes@@</span>
+/%
+
+THINGS TO IMPLEMENT BEFORE 1.0.0:
+    * Custom spells.
+    * PWA support with precaching.
+    * Google analytics.
+
+AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
+
+%/\
+!!! 0.9.5: Beta patch 4
+* The UI has been improved to better match material design standards.
+* The import/export feature now supports the file system, meaning you can save and load spellbooks to and from your hard disk, rather than copying and pasting all that fiddly gibberish.
+
 !!! 0.9.3: Beta patch 3
 * Spellbooks are now automatically ordered based on access: spellbooks you use more will stay at the top of the list and spellbooks you use less will sink to the bottom.  Opening a spellbook and adding spells to a spellbook count as accessing it (removing spells doesn't, but you can't remove spells without opening it, so...).  Creating a new spellbook also counts as "accessing" it for the purposes of this system.  Editing a spellbook's name or tags does not count, however.
 * Fixed a bug in the 'priced materials' components filter.

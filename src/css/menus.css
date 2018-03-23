@@ -115,3 +115,37 @@ input[type=text], select {
 input[type=text]:hover, select:hover, input[type=text]:focus, select:focus, input[type=text]:active, select:active {
     background-color: #fff !important;
 }
+
+input[type="file"] {
+    display: none;
+}
+
+.upload-file {
+    display: block;
+    cursor: pointer;
+	color: #eee;
+	background-color: #35a;
+	border: 1px solid #57c;
+	line-height: normal;
+	padding: 0.4em;
+	transition-duration: 200ms;
+	user-select: none;
+    width: 60%;
+    margin: 0.5em 10em;
+}
+
+.upload-file:hover {
+    background-color: #57c;
+	border-color: #79e;
+}
+
+html.light .upload-file {
+    color: #fff;
+    background-color: #ee82ee;
+    border: 1px solid #9400d3;
+}
+
+html.light .upload-file:hover {
+    background-color: #9400d3;
+    border-color: #9400d3;
+}

@@ -12,11 +12,17 @@ Would you like to export or import spellbooks?
     ''Select a spellbook:''
     <<dropdown '_export' $listOfLists>>
 
-    <span class='big-link'><<button 'Export As Text'>>
-        <<set _export to SpellList.getByName(_export).exportList()>>
-        <<run $('#share-output').empty().append(_export)>>
+    <span class='big-link'><<button 'Export To File'>>
+        <<run setup.share.save(_export, SpellList.getByName(_export).exportList())>>
     <</button>></span>
-
+    
+    ''-OR-''
+    
+    <span class='big-link'><<button 'Export As Text'>>
+        <<run $('#share-output').empty().append(SpellList.getByName(_export).exportList())>>
+    <</button>></span>
+    
+    ''Share text:''
     <textarea id='share-output' readonly></textarea>
     <span class='big-link'><<button 'Select All'>>
         <<run $('#share-output').select()>> 
@@ -31,7 +37,14 @@ Would you like to export or import spellbooks?
 
 ::Import [share-view]
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/data.svg]]@@ @@#menu-text;Import Spellbooks@@</span>
-<center>''Enter a spellbook's share text:''
+<center>
+<label for="file-upload" class="upload-file">\
+    Import From File\
+</label><input id="file-upload" type="file" />
+
+''-OR-''
+
+''Enter a spellbook's share text:''
 <textarea id='share-input'></textarea>
 
 <span class='big-link'><<button 'Import From Text'>>
