@@ -5,6 +5,7 @@
 <span id='results'></span><<run spells.render.load(false, '#results', function () { return spells.render.listAll($custom); })>>
 
 :: Custom Edit [custom-spell dialog]
+@@#errors;@@
 ''Name:''
 <<textbox '_name' ''>>
 
@@ -60,8 +61,16 @@
         ritual : _ritual,
         school : _school
     }>>
-    <<run setup.custom.create(_spellInfo)>>
-    <<run notify('Custom spell created.')>>
-    <<run Dialog.close()>>
-    <<run Engine.play('Custom')>>
+    <<checkCustomSpellInfo _spellInfo>>
+    <<if _errors.length > 0>>
+        <<addclass '#errors' 'open'>>
+        <<replace '#errors'>>\
+            _reportErrors\
+        <</replace>>
+    <<else>>
+        <<run setup.custom.create(_spellInfo)>>
+        <<run notify('Custom spell created.')>>
+        <<run Dialog.close()>>
+        <<run Engine.play('Custom')>>
+    <</if>>
 <</button>></span>

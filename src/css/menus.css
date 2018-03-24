@@ -149,3 +149,14 @@ html.light .upload-file:hover {
     background-color: #9400d3;
     border-color: #9400d3;
 }
+
+#errors {
+    display: none;
+    color: #e22;
+    border: 2px solid #f00;
+    padding: 1em;
+    margin: 1em;
+}
+#errors.open {
+    display: block;
+}

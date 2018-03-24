@@ -2,6 +2,10 @@
 
 State.variables.custom = [];
 
+function loadSpellForEditing () {
+    // todo
+}
+
 function createCustomSpell ( obj /* object */ ) {
     var spellObj = {
         // the base object to build off of

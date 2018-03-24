@@ -58,3 +58,33 @@
         <</if>>
    <</silently>>\
 <</widget>>
+
+<<widget 'checkCustomSpellInfo'>>\
+    <<silently>>
+        <<set _errors to []>>
+        <<set _info to $args[0]>>
+        
+        
+        <<if !_info.name || !spells.get.cleanText(_info.name)>>
+            <<run fast.push(_errors, 'No name.')>>
+        <</if>>
+        <<if _info.classes.length < 1>>
+            <<run fast.push(_errors, 'No classes selected.')>>
+        <</if>>
+        <<if !_info.description || !spells.get.cleanText(_info.description)>>
+            <<run fast.push(_errors, 'No description.')>>
+        <</if>>
+        <<if !_info.action || !spells.get.cleanText(_info.action)>>
+            <<run fast.push(_errors, 'No casting time.')>>
+        <</if>>
+        <<if !_info.duration || !spells.get.cleanText(_info.duration)>>
+            <<run fast.push(_errors, 'No duration.')>>
+        <</if>>
+        <<if !_info.range || !spells.get.cleanText(_info.range)>>
+            <<run fast.push(_errors, 'No range.')>>
+        <</if>>
+        
+        <<set _reportErrors to "''Some information was not provided:''\n\n" + _errors.join('\n')>>
+    <</silently>>\
+<</widget>>
+    

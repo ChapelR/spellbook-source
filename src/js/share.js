@@ -3,9 +3,14 @@
 function compressSpells (list) {
     try {
         return fast.map(list, function (spellObj) {
-            return fast.findIndex(spells.list, function (mainListObj) {
+            var idx = fast.findIndex(spells.list, function (mainListObj) {
                 return (spellObj.name === mainListObj.name);
             });
+            if (idx === -1) {
+                // preserve order by pushing custom spell directly into array
+                return spellObj;
+            }
+            return idx;
         });
     } catch (err) {
         console.error(err);
@@ -16,7 +21,23 @@ function compressSpells (list) {
 function decompressSpells (list) {
     try {
         return fast.map(list, function (idx) {
-            return spells.list[idx];
+            if (typeof idx === 'number') {
+                return spells.list[idx];
+            } else if (typeof idx === 'object' && idx.hasOwnProperty('name')) {
+                console.log(idx);
+                // a custom spell has been imported
+                var sv = State.variables,
+                    has = fast.find(sv.custom, function (spellObj) {
+                        return Object.is(idx, spellObj);
+                    });
+                if (has) {
+                    return has;
+                } else {
+                    idx.name = idx.name + ' (imported)';
+                    fast.push(State.variables.custom, idx);
+                    return idx;
+                }
+            }
         });
     } catch (err) {
         console.error(err);
@@ -29,7 +50,7 @@ function wrapUp (list) {
         return {
             n : list.name,
             t : list.tags.join(' '),
-            s : compressSpells(list.spells) // new
+            s : compressSpells(list.spells) 
         };
     } catch (e) {
         console.error(e);
@@ -107,7 +128,7 @@ function reconfigure (obj) {
             }
             obj.n = okayName;
         }
-        obj.s = decompressSpells(obj.s); // new
+        obj.s = decompressSpells(obj.s); 
         return SpellList.add(obj.n, obj.t.split(' '), obj.s);
     } catch (e) {
         console.error(e);
