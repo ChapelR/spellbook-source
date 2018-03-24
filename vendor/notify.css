@@ -10,6 +10,7 @@
 	padding : 0.5em;
 	background-color : #fff;
 	color : #000;
+    z-index: 1000;
 	-webkit-transition-duration : 0.3s;
 	-moz-transition-duration : 0.3s;
 	-o-transition-duration : 0.3s;

@@ -19,6 +19,7 @@
 :: Widgets [widget]
 <<widget 'resetFilters'>>\
     <<silently>>
+    <<set _customSpells to 'include'>>
     <<set _class to 'any'>>
     <<set _level to 'any'>>
     <<set _school to 'any'>>
@@ -28,4 +29,32 @@
     <<set _duration to 'any'>>
     <<set _ritual to false>>
     <</silently>>\
+<</widget>>
+
+<<widget 'pushClasses'>>\
+    <<silently>>
+        <<set _class to $args[0]>>
+        <<if State.temporary[_class]>>
+            <<run fast.push(_classes, _class)>>
+        <</if>>
+   <</silently>>\
+<</widget>>
+
+<<widget 'pushComponents'>>\
+    <<silently>>
+        <<set _priced to spells.get.cleanText(_components[3])>>
+        <<set _comp to { array : [], mat : '' }>>
+        <<if _components[0]>>
+            <<run fast.push(_comp.array, 'v')>>
+        <</if>>
+        <<if _components[1]>>
+            <<run fast.push(_comp.array, 's')>>
+        <</if>>
+        <<if _components[2]>>
+            <<run fast.push(_comp.array, 'm')>>
+        <</if>>
+        <<if _priced>>
+            <<set _comp.mat to _priced.toUpperFirst()>>
+        <</if>>
+   <</silently>>\
 <</widget>>

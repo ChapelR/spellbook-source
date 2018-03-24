@@ -1,10 +1,13 @@
 :: Custom [custom-view]
 /% the custom spell list view %/\
+<<set _classes to []>><<set _components to []>><<set _pricedComp to (_components && _components[3]) ? _components[3] : ''>>\
 <<link 'Create'>><<run setup.custom.dialog(true)>><</link>>
+<span id='results'></span><<run spells.render.load(false, '#results', function () { return spells.render.listAll($custom); })>>
 
 :: Custom Edit [custom-spell dialog]
-/% create a new custom spell / edit existing custom spells %/\
-<<set _classes to []>><<set _pricedComp to (_components && _components[3]) ? _components[3] : ''>>\
+''Name:''
+<<textbox '_name' ''>>
+
 ''Classes (check all that apply):''
 * <label>Bard: <<checkbox '_bard' false true>></label>
 * <label>Cleric: <<checkbox '_cleric' false true>></label>
@@ -18,6 +21,9 @@
 ''School:''
 <<dropdown '_school' setup.schoolList.slice(1)>>
 
+''Level:''
+<<dropdown '_level' setup.levelList.slice(1)>>
+
 ''Components:''
 * <label>Verbal: <<checkbox '_components[0]' false true>></label>
 * <label>Somatic: <<checkbox '_components[1]' false true>></label>
@@ -29,6 +35,33 @@
 
 :: Custom Confirm [custom-spell dialog]
 /% a confirm button for the custom spell edit dialog %/\
+''Description:''
+<<textarea '_descr' ''>>
+
 <span class='w100-link' id='enter-link'><<button 'Confirm'>>
-    /% build spell %/
+    <<pushClasses 'bard'>>
+    <<pushClasses 'cleric'>>
+    <<pushClasses 'druid'>>
+    <<pushClasses 'paladin'>>
+    <<pushClasses 'ranger'>>
+    <<pushClasses 'sorcerer'>>
+    <<pushClasses 'warlock'>>
+    <<pushClasses 'wizard'>>
+    <<pushComponents>>
+    <<set _spellInfo to {
+        casting_time: _action,
+        classes : _classes,
+        comp : _comp,
+        description: _descr,
+        duration: _duration,
+        level : _level,
+        name : _name,
+        range : _range,
+        ritual : _ritual,
+        school : _school
+    }>>
+    <<run setup.custom.create(_spellInfo)>>
+    <<run notify('Custom spell created.')>>
+    <<run Dialog.close()>>
+    <<run Engine.play('Custom')>>
 <</button>></span>

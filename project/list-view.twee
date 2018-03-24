@@ -1,6 +1,7 @@
 :: Results [list-view]
 <<set $ctx to ''>>\
 <<resetFilters>>\
+<<set setup.results to spells.get.sort(spells.list.concat($custom))>>\
 <<set _filtered to null>>\
 /% additional info (like book name if applicable)%/\
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/all.svg]]@@ @@#menu-text;$listName@@</span>
@@ -35,6 +36,8 @@
 <</nobr>>
 
 :: Filter [dialog]
+''Custom Spells'':
+<<dropdown '_customSpells' `['include', 'exclude', 'only']`>>
 
 ''Class:''
 <<dropdown '_class' setup.classList>>
@@ -78,6 +81,10 @@
     <<set _level to setup.levelList.indexOf(_level) - 1>>
     <<if _level >= 0>>
         <<set _filtered to spells.get.byLevel(_level, _filtered)>>
+    <</if>>
+    
+    <<if _customSpells && _customSpells !== 'include'>>
+        <<set _filtered to spells.get.byCustom(_customSpells, _filtered)>>
     <</if>>
     
     <<if _class !== 'any'>>

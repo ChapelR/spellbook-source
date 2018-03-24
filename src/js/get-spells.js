@@ -69,10 +69,10 @@ function getSpellsByTag (tagName, list) {
     list = getList(list);
     
     tagName = clean(tagName);
-    return sortList(fast.filter(list, function (spellObj, idx, arr) {
+    return fast.filter(list, function (spellObj, idx, arr) {
         var spellTags = spellObj.tags;
         return spellTags.includes(tagName);
-    }));
+    });
 }
 
 function getSpellsByLevel (level, list) {
@@ -102,7 +102,7 @@ function getSpellsByComponent (compArray, list) {
         console.warn('Invalid component array in getSpellsByComponent().');
         return list;
     }
-    return sortList(fast.filter(list, function (spellObj, idx, arr) {
+    return fast.filter(list, function (spellObj, idx, arr) {
         var spellComp = spellObj.components;
         if (!compArray[0] && spellComp.verbal) {
             return false;
@@ -121,7 +121,7 @@ function getSpellsByComponent (compArray, list) {
             });
         }
         return true;
-    }));
+    });
 }
 
 function getSpellsBySchool (school, list) {
@@ -130,18 +130,18 @@ function getSpellsBySchool (school, list) {
     if (!school) {
         return list;
     }
-    return sortList(fast.filter(list, function (spellObj, idx, arr) {
+    return fast.filter(list, function (spellObj, idx, arr) {
         var spellSchool = spellObj.school;
         return school === spellSchool;
-    }));
+    });
 }
 
 function getSpellsByRitual (list) {
     list = getList(list);
     
-    return sortList(fast.filter(list, function (spellObj, idx, arr) {
+    return fast.filter(list, function (spellObj, idx, arr) {
         return spellObj.ritual;
-    }));
+    });
 }
 
 function getSpellsByThing (prop, str, list) {
@@ -154,10 +154,10 @@ function getSpellsByThing (prop, str, list) {
     if (typeof str === 'number') {
         str = clean(String(str));
     }
-    return sortList(fast.filter(list, function (spellObj) {
+    return fast.filter(list, function (spellObj) {
         var property = clean(spellObj[prop]) + '';
         return (property.includes(str));
-    }));
+    });
 }
 
 function getSpellsByNotThing (prop, avoid, list) {
@@ -167,12 +167,12 @@ function getSpellsByNotThing (prop, avoid, list) {
         console.warn('invalid propert in getSpellsByThing()');
         return list;
     }
-    return sortList(fast.filter(list, function (spellObj) {
+    return fast.filter(list, function (spellObj) {
         var property = clean(spellObj[prop] + '');
         return !fast.some(avoid, function (item) {
             return property.includes(item);
         });
-    }));
+    });
 }
 
 function getSpellsByCastingTime (time, list) {
@@ -205,7 +205,7 @@ function getSpellsByRange (range, list) {
     
     var rangeNum = getNumberFromString(range);
     
-    return sortList(fast.filter(list, function (spellObj) {
+    return fast.filter(list, function (spellObj) {
         var spellRange = clean(spellObj.range),
             spellRangeNum = getNumberFromString(spellRange);
         
@@ -229,7 +229,7 @@ function getSpellsByRange (range, list) {
             return spellRange.includes(' ' + rangeNum + ' ');
         }
         return spellRange.includes(range);
-    })); 
+    }); 
 }
 
 function getSpellsByDuration (time, list) {
@@ -258,6 +258,23 @@ function getSpellsByDuration (time, list) {
     return getSpellsByThing('duration', time, list);
 }
 
+function getSpellsByCustom (keyword, list) {
+    list = getList(list);
+    
+    if (keyword === 'exclude') {
+        return fast.filter(list, function (spellObj) {
+            return !spellObj.custom;
+        });
+    }
+    if (keyword === 'only') {
+        return fast.filter(list, function (spellObj) {
+            return spellObj.custom;
+        });
+    } else {
+        return list;
+    }
+}
+
 spells.list = sortList(spells.list);
 
 // exports
@@ -275,5 +292,6 @@ window.spells.get = {
     byDuration : getSpellsByDuration,
     byRitual : getSpellsByRitual,
     byThing : getSpellsByThing,
-    byNotThings : getSpellsByNotThing
+    byNotThings : getSpellsByNotThing,
+    byCustom : getSpellsByCustom
 };

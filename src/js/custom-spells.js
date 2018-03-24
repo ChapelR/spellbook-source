@@ -29,7 +29,8 @@ function createCustomSpell ( obj /* object */ ) {
             "cleric",
             "cantrip"
         ],
-        "type": "Evocation cantrip" // generate
+        "type": "Evocation cantrip",
+        "custom": true // generate
     };
     if (obj && typeof obj === 'object') {
         
@@ -38,22 +39,21 @@ function createCustomSpell ( obj /* object */ ) {
             somatic : (obj.comp.array.includes('s')) ? true : false,
             verbal : (obj.comp.array.includes('v')) ? true : false,
             materials_needed : [ ((obj.comp.mat) ? String(obj.comp.mat) : '') ],
-            raw : obj.comp.array.join(', ') + (obj.comp.mat) ? '(' + String(obj.comp.mat) + ')' : ''
+            raw : (obj.comp.array.join(', ').toUpperCase()) + ((obj.comp.mat) ? ' (' + String(obj.comp.mat) + ')' : '')
         };
         
         obj.tags = [];
-        obj.classes.forEach( function (className) {
-            obj.tags.push(String(className.trim().toLowerCase()));
+        fast.forEach(obj.classes, function (className) {
+            fast.push(obj.tags, String(className.trim().toLowerCase()));
         });
         obj.classes = clone(obj.tags);
-        obj.tags.push((obj.level = 'cantrip') ? 'cantrip' : (obj.level[0] + 'level'));
+        fast.push(obj.tags, (obj.level = 'cantrip') ? 'cantrip' : (obj.level[0] + 'level'));
         obj.type = String(obj.school + ' ' + obj.level + ((obj.ritual) ? ' (ritual)' : '')).toLowerCase().toUpperFirst();
         
         var props = Object.keys(obj);
-        props.forEach( function (prop) {
+        fast.forEach(props, function (prop) {
             if (spellObj.hasOwnProperty(prop)) {
                 spellObj[prop] = obj[prop];
-                console.log(spellObj);
             }
         });
         
@@ -67,7 +67,7 @@ function createCustomSpell ( obj /* object */ ) {
 
 function customSpell (obj) {
     var newSpell = createCustomSpell(obj);
-    State.variables.custom.push(newSpell);
+    fast.push(State.variables.custom, newSpell);
 }
 
 function createSpellInterfaceText (storyVar /* string (story variable) */, listName /* string (slug) */, listOptions /* array */) {
@@ -121,7 +121,7 @@ function constructTextInputInterface () {
     // handles: action, range, and duration
     var $action = createSpellInterfaceText('_action', 'cast-time', ['1 action', '1 bonus action', '1 reaction']),
         $range = createSpellInterfaceText('_range', 'spell-range', ['self', 'touch', 'sight', '30 feet', '60 feet', '90 feet', '100 feet', '120 feet', '150 feet']),
-        $duration = createSpellInterfaceText('_duration', 'duration', ['instant', 'concentration', '1 round', '1 minute', '1 hour', '8 hours', '10 minutes', 'until dispelled']);
+        $duration = createSpellInterfaceText('_duration', 'duration', ['instantaneous', 'concentration', '1 round', '1 minute', '1 hour', '8 hours', '10 minutes', 'until dispelled']);
     
     function labelMe (labelText, $el) {
         return $(document.createElement('label'))
@@ -148,6 +148,7 @@ function callCustomSetup (openDialog) {
 }
 
 setup.custom = {
+    debugCreate : createCustomSpell,
     create : customSpell,
     textInput : createSpellInterfaceText,
     buildTextInputs : constructTextInputInterface,
