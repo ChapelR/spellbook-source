@@ -1,6 +1,20 @@
 :: Lists [spells]
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/lists.svg]]@@ @@#menu-text;Spell Books@@</span>
-<span id='book-list'></span><<run SpellList.render('#book-list', $lists)>>
+<span id='book-list'></span><<nobr>>
+    <<if $listOfLists && $listOfLists.length>>
+        <<run SpellList.render('#book-list', $lists)>>
+    <<else>>
+        <<timed 40ms>>
+            <<run setup.loading.dismiss()>>
+            <<replace '#book-list'>>You don't seem to have any spellbooks.  Would you like to <<link 'create one'>>
+                <<set _spellToAdd to false, _bookToEdit to false>>
+                <<popup 'Edit' 'New SpellBook' 'new-book'>>
+            <</link>>?<</replace>>
+            <<notify>>No spellbooks...<</notify>>
+        <</timed>>
+    <</if>>
+    <<set _filtered to clone($custom)>>
+<</nobr>>  
 
 :: Edit [dialog]
 <<nobr>>

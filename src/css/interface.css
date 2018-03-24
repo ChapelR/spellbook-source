@@ -74,7 +74,7 @@ textarea {
     width: 100%;
     background-color: #222;
     color: #fff;
-    border-bottom: 2px solid #000;
+    /* border-bottom: 2px solid #000; */
     overflow: hidden;
     text-align: center;
     z-index: 50;
@@ -109,12 +109,12 @@ textarea {
     background: url('assets/images/all.svg');
 }
 
-#ui-menu .icon {
-    background: url('assets/images/menu.svg');
-}
-
 #ui-lists .icon {
     background: url('assets/images/lists.svg');
+}
+
+#ui-custom .icon {
+    background: url('assets/images/custom.svg');
 }
 
 #ui-about .icon {
@@ -142,7 +142,7 @@ textarea {
     width: 100%;
     background-color: #222;
     color: #eee;
-    border-top: 2px solid #000;
+    /* border-top: 2px solid #000; */
     overflow: hidden;
     text-align: center;
     z-index: 50;

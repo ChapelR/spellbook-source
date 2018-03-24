@@ -3,7 +3,7 @@
 /%
 
 THINGS TO IMPLEMENT BEFORE 1.0.0:
-    * Custom spells.
+    * Edit custom spells.
     * PWA support with precaching.
 
 AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
@@ -11,9 +11,10 @@ AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
 %/\
 !!! 0.9.6: Beta patch 5
 * Added [[Google Analytics|https://www.google.com/analytics/]].
-* Compression for spellbook files has been increased by an almost comical amount (a file containing all spells has gone from 163 KB to 1 KB).  Unfortunately, old spellbook files are no longer importable.  This compression takes a second or two, so the app may hang for a moment when you export or import, though not enough to warrant a load screen.  A worthy trade.
-* UI improvements.  Made some minor adjustments to the UI's appearance, particularly on mobiles.
-* Basic support for custom spells has been added.
+* Compression for spellbook files has been increased by an almost comical amount (a file containing all spells has gone from 163 KB to 1 KB).  Unfortunately, old spellbook files are no longer importable.
+* UI changes and improvements.
+* Basic support for custom spells has been added.  Click the @@.inner-image;[img[assets/images/custom.svg]]@@ icon to get started.  This system should not be considered stable, but it's a good starting point.  In the future, they'll be editable, but right now, you can only add and delete, and not edit the custom spells once created.  Importing/exporting custom spells is also a bit wonky right now, so do that at your own risk.
+* Fixed a few minor to moderate bugs and issues, particularly related to the {{{[Remove all.]}}} button, which has always been the bane of my existence.
 * Performance improvements.
 
 !!! 0.9.5: Beta patch 4

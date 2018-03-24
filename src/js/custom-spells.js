@@ -3,7 +3,7 @@
 State.variables.custom = [];
 
 function loadSpellForEditing () {
-    // todo
+    // todo: i need to clean up the maker for this to work... or fork it
 }
 
 function createCustomSpell ( obj /* object */ ) {

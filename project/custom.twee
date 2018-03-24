@@ -1,8 +1,21 @@
 :: Custom [custom-view]
-/% the custom spell list view %/\
+<<set $ctx to ''>>\
 <<set _classes to []>><<set _components to []>><<set _pricedComp to (_components && _components[3]) ? _components[3] : ''>>\
-<<link 'Create'>><<run setup.custom.dialog(true)>><</link>>
-<span id='results'></span><<run spells.render.load(false, '#results', function () { return spells.render.listAll($custom); })>>
+<span id='menu-heading'>@@#menu-icon;[img[assets/images/custom.svg]]@@ @@#menu-text;Custom Spells@@</span>
+<span id='results'></span><<nobr>>
+    <<if $custom && $custom.length>>
+        <<run spells.render.load(false, '#results', function () { return spells.render.listAll($custom); })>>
+    <<else>>
+        <<timed 40ms>>
+            <<run setup.loading.dismiss()>>
+            <<replace '#results'>>You don't seem to have any custom spells.  Would you like to <<link 'create one'>>
+                <<run setup.custom.dialog(true)>>
+            <</link>>?<</replace>>
+            <<notify>>No custom spells...<</notify>>
+        <</timed>>
+    <</if>>
+    <<set _filtered to clone($custom)>>
+<</nobr>>
 
 :: Custom Edit [custom-spell dialog]
 @@#errors;@@

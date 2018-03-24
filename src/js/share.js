@@ -34,7 +34,7 @@ function decompressSpells (list) {
                     return has;
                 } else {
                     idx.name = idx.name + ' (imported)';
-                    fast.push(State.variables.custom, idx);
+                    fast.push(sv.custom, idx);
                     return idx;
                 }
             }

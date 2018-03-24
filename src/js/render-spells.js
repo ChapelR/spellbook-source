@@ -1,5 +1,67 @@
 function createSpellDescription (spellObj) {
-    return "<span class='descr-type'>//" + spellObj.type.toLowerCase() + "//</span><br /><div class='descr-heading'><br />''Casting Time:'' " + spellObj.casting_time + "<br />''Range:'' " + spellObj.range + "<br />''Classes:'' " + spellObj.classes.join(', ') + "<br />''Components:'' " + spellObj.components.raw + "<br />''Duration:'' " + spellObj.duration + " <br /></div><div class='descr-main'><br />" + spellObj.description + "<br />" + ((spellObj.hasOwnProperty('higher_levels')) ? ('<br />' + spellObj.higher_levels + '<br />') : '') + "</div>";
+    var $wrapper = $(document.createElement('span'))
+        .addClass('description-wrapper-for-spells'),
+        main = "<span class='descr-type'>//" + spellObj.type.toLowerCase() + "//</span><br /><div class='descr-heading'><br />''Casting Time:'' " + spellObj.casting_time + "<br />''Range:'' " + spellObj.range + "<br />''Classes:'' " + spellObj.classes.join(', ') + "<br />''Components:'' " + spellObj.components.raw + "<br />''Duration:'' " + spellObj.duration + " <br /></div><div class='descr-main'><br />" + spellObj.description + "<br />" + ((spellObj.hasOwnProperty('higher_levels')) ? ('<br />' + spellObj.higher_levels + '<br />') : '') + "</div>", $delete, $edit;
+    //need to add edit/delete for custom spell system
+    
+    $wrapper.wiki(main);
+    
+    if (spellObj.custom) {
+        
+        var sv = State.variables;
+        
+        var $yes = $(document.createElement('button'))
+            .css('float', 'left')
+            .addClass('dialog-confirm')
+            .attr('tabindex', '0')
+            .wiki('Yes')
+            .ariaClick( function () {
+                // close dialog and engage loader... this could take a while
+                setup.loading.show(); 
+                Dialog.close();
+                // find the spell instances
+                var del = fast.findIndex(sv.custom, function (spell) {
+                    // delete from custom list
+                    return spell.name === spellObj.name;
+                });
+                sv.custom.deleteAt(del);
+                fast.forEach(sv.lists, function (book) {
+                    // comb through each spellbook
+                    var deleteMe = fast.findIndex(book.spells, function (spell) {
+                        return spell.name === spellObj.name;
+                    });
+                    if (deleteMe > -1) {
+                        book.spells.deleteAt(deleteMe);
+                    }
+                });
+                Engine.play(passage());
+            });
+        
+        var $no = $(document.createElement('button'))
+            .css('float', 'right')
+            .addClass('dialog-cancel')
+            .attr('tabindex', '0')
+            .wiki('No')
+            .ariaClick( function () {
+                Dialog.close();
+            });
+        
+        $delete = $(document.createElement('button'))
+            .addClass('w100-link delete-custom spell')
+            .attr('id', 'delete-button')
+            .wiki('Delete.')
+            .ariaClick({ label : 'Delete custom spell.' }, function () {
+                Dialog.setup('Delete Custom Spell', 'delete-warning');
+                Dialog.wiki('Are you sure?<br /><br />The spell will be deleted from every spellbook.<br /><br />');
+                Dialog.append($yes, $no);
+                Dialog.wiki('<br />');
+                Dialog.open();
+            });
+        
+        $wrapper.append($delete).wiki('<br />');
+    }
+    
+    return $wrapper;
 }
 
 function createSpellDescriptionLink (spellObj, $el) {
@@ -19,7 +81,7 @@ function createSpellDescriptionLink (spellObj, $el) {
                 return; // do nothing else
             }
             Dialog.setup(spellObj.name, 'spell-description');
-            Dialog.wiki(spells.render.spellDescr(spellObj));
+            Dialog.append(spells.render.spellDescr(spellObj));
             Dialog.open();
         });
 }

@@ -1,32 +1,14 @@
 /* font options */
-html.small {
+html.small #story, html.small #ui-dialog {
     font-size: 14px;
 }
-html.small #top-bar {
-    font-size: 16px;
-}
-html.small #caption {
-    font-size: 16px;
-}
 
-html.large {
+html.large #story, html.large #ui-dialog {
     font-size: 18px;
 }
-html.large #top-bar {
-    font-size: 16px;
-}
-html.large #caption {
-    font-size: 16px;
-}
 
-html.very-large {
+html.very-large #story, html.very-large #ui-dialog {
     font-size: 20px;
-}
-html.very-large #top-bar {
-    font-size: 16px;
-}
-html.very-large #caption {
-    font-size: 16px;
 }
 
 /* light theme */

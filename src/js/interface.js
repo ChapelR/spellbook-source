@@ -80,6 +80,7 @@ postdisplay['caption-link'] = function (t) {
     captionSetup('search', 'search', 'Return');
     captionSetup('spells', 'books', 'create');
     captionSetup('list-view', 'list', 'filter');
+    captionSetup('custom-view', 'custom', 'create');
 };
 
 function whatCaption (cls) {
@@ -102,6 +103,9 @@ $('#caption').ariaClick( function (e) {
         Dialog.setup('Filter', 'list-view-filter');
         Dialog.wiki(Story.get('Filter').text);
         Dialog.open();
+        $('#search').val('Search...');
+    } else if (whatCaption('custom-view')) {
+        setup.custom.dialog(true);
         $('#search').val('Search...');
     }
 });
@@ -156,6 +160,10 @@ $('#ui-about').ariaClick({ label : 'About.' }, function () {
     Dialog.setup('About', 'about-dialog');
     Dialog.wiki( Story.get('About').text );
     Dialog.open();
+});
+$('#ui-custom').ariaClick({ label : 'Custom spells.' }, function () {
+    $('#story').attr('data-ctx', '');
+    Engine.play('Custom');
 });
 $('#ui-lists').ariaClick({ label : 'Your spell books.' }, function () {
     Engine.play('Lists');
@@ -343,17 +351,19 @@ var $removeAll = $(document.createElement('button'))
     })
     .appendTo('#story');
 
+function hideControls () {
+    $addAll.addClass('closed');
+    $removeAll.addClass('closed');
+}
+
 function showControls () {
+    hideControls();
     $addAll.removeClass('closed');
     $addAll.empty().wiki('Add all.');
     if (State.variables.ctx) {
         $removeAll.removeClass('closed');
         $removeAll.empty().wiki('Remove all.');
     }
-}
-function hideControls () {
-    $addAll.addClass('closed');
-    $removeAll.addClass('closed');
 }
 
 // todo: add remove all / remove selected
@@ -384,7 +394,7 @@ $(document).on(':select-spell', function (e) {
 });
 
 postdisplay['show-goodies'] = function (t) {
-    if (tags().includes('list-view')) {
+    if (tags().includes('list-view') || tags().includes('custom-view')) {
         $('#bottom-bar').show();
         $('#search').val('Search...'); // reset search term on load
         showControls();

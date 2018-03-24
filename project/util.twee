@@ -68,13 +68,22 @@
         <<if !_info.name || !spells.get.cleanText(_info.name)>>
             <<run fast.push(_errors, 'No name.')>>
         <</if>>
+        <<set _checkName to spells.get.cleanText(_info.name)>>
+        <<set _check to [
+            fast.find(spells.list, function (spell) { return spells.get.cleanText(spell.name) === _checkName }),
+            fast.find($custom, function (spell) { return spells.get.cleanText(spell.name) === _checkName })
+        ]>>
+        <<run console.log(_check)>>
+        <<if _check[0] || _check[1]>>
+            <<run fast.push(_errors, 'Name taken.')>>
+        <</if>>
         <<if _info.classes.length < 1>>
             <<run fast.push(_errors, 'No classes selected.')>>
         <</if>>
         <<if !_info.description || !spells.get.cleanText(_info.description)>>
             <<run fast.push(_errors, 'No description.')>>
         <</if>>
-        <<if !_info.action || !spells.get.cleanText(_info.action)>>
+        <<if !_info.casting_time || !spells.get.cleanText(_info.casting_time)>>
             <<run fast.push(_errors, 'No casting time.')>>
         <</if>>
         <<if !_info.duration || !spells.get.cleanText(_info.duration)>>

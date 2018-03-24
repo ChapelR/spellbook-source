@@ -25,7 +25,7 @@
 <span id='menu-heading'>@@#menu-icon;[img[assets/images/all.svg]]@@ @@#menu-text;$listName@@</span>
 <span id='results'></span>
 <<nobr>>
-    <<if _list.spells.length > 0>>
+    <<if _list.spells && _list.spells.length > 0>>
         <<run spells.render.load(false, '#results', function () { return _list.renderList(); })>>
     <<else>>
         <<timed 40ms>>

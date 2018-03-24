@@ -39,7 +39,7 @@
     text-align: center;
 }
 
-.w100-link button {
+.w100-link button, button.w100-link {
     width: 100%;
     margin: 0.5em 0;
 }
@@ -83,12 +83,12 @@
 #delete-button button, .confirm-button button {
     width: 100%;
 } 
-#delete-button button {
+#delete-button button, button#delete-button {
     background-color: #c00;
     border-color: #c33;
     margin: 0.5em 0;
 }
-#delete-button button:hover {
+#delete-button button:hover, button#delete-button:hover {
     background-color: #c33;
 }
 

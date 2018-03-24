@@ -7,6 +7,9 @@
         <span id='ui-lists' class='ui-button load-list'>
             <span class='icon'></span>
         </span>
+        <span id='ui-custom' class='ui-button load-list'>
+            <span class='icon'></span>
+        </span>
         <span id='ui-about' class='ui-core'>
             <span class='icon'></span>
         </span>

@@ -72,11 +72,14 @@
     .main-title {
         font-size: 32px;
     }
+    .ui-button, .ui-core {
+        margin: 1em 0.5em;
+    }
 }
 
 @media screen and (max-width: 450px) {
     .ui-button, .ui-core {
-        margin: 1em 0.5em;
+        margin: 1em 0.2em;
     }
     #story {
         margin: 6em 2em 5em 2em;
@@ -116,10 +119,17 @@
     }
 }
 
+@media screen and (max-width: 380px) {
+    .ui-button, .ui-core {
+        height: 2.5em;
+        width: 2.5em;
+        margin: 1.2em 0.2em;
+    }
+}
 @media screen and (max-width: 325px) {
     .ui-button, .ui-core {
-        height: 2em;
-        width: 2em;
-        margin: 1.2em 0.5em;
+        height: 2.3em;
+        width: 2.3em;
+        margin: 1.3em 0;
     }
 }

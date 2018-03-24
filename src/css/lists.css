@@ -72,10 +72,10 @@ button#add-all, button#remove-all {
     max-width: 10em;
 }
 button#add-all {
-    top: 7em;
+    top: 7.2em;
 }
 button#remove-all {
-    top: 9em;
+    top: 9.4em;
 }
 
 button#add-all.closed, button#remove-all.closed {
