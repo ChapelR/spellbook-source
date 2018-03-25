@@ -148,12 +148,12 @@ $(document).on('keyup', function (e) {
 $('#ui-restart').ariaClick({ label : 'Restart the app.' }, function () {
     UI.restart();
 });
-$('#ui-data').ariaClick({ label : 'Import and export lists.' }, function () {
+$('#ui-data').ariaClick({ label : 'Import and export spellbooks.' }, function () {
     Dialog.setup('Share', 'share-spellbooks');
     Dialog.wiki(Story.get('Share').text);
     Dialog.open();
 });
-$('#ui-settings').ariaClick({ label : 'Configure settings.' }, function () {
+$('#ui-settings').ariaClick({ label : 'Settings.' }, function () {
     UI.settings();
 });
 $('#ui-about').ariaClick({ label : 'About.' }, function () {
@@ -165,7 +165,7 @@ $('#ui-custom').ariaClick({ label : 'Custom spells.' }, function () {
     $('#story').attr('data-ctx', '');
     Engine.play('Custom');
 });
-$('#ui-lists').ariaClick({ label : 'Your spell books.' }, function () {
+$('#ui-lists').ariaClick({ label : 'Your spellbooks.' }, function () {
     Engine.play('Lists');
 });
 $('#ui-all').ariaClick({ label : 'All spells.' }, function () {

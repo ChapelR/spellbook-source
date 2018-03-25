@@ -50,10 +50,10 @@
 
 <span class='w100-link-special'><<message 'Advanced Filters' btn>>
 ''Exclude Components:''
-* <label>Verbal: <<checkbox '_components[0]' false true>></label>
-* <label>Somatic: <<checkbox '_components[1]' false true>></label>
-* <label>Material: <<checkbox '_components[2]' false true>></label>
-* <label>Priced Materials: <<checkbox '_components[3]' false true>></label>
+* <label>Verbal: <<checkbox '_components[0]' false true checked>></label>
+* <label>Somatic: <<checkbox '_components[1]' false true checked>></label>
+* <label>Material: <<checkbox '_components[2]' false true checked>></label>
+* <label>Priced Materials: <<checkbox '_components[3]' false true checked>></label>
 
 ''Casting Time:''
 <<dropdown '_action' setup.actionList>>
