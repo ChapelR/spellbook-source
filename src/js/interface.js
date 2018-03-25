@@ -414,6 +414,12 @@ $(document).on('keyup', function (e) {
         Engine.play('Start'); // go to landing page
     }
     if (e.shiftKey && e.ctrlKey && e.which == 13) { // ctrl + shift + enter 
-        Engine.play('Custom'); // go to custom spell page (test)
+        var sv = State.variables;
+        sv.loader = !sv.loader;
+        if (sv.loader) {
+            LoadScreen.show();
+        } else {
+            LoadScreen.hide();
+        }
     }
 });

@@ -1,0 +1,2 @@
+#imgloader-box{position:fixed;left:0;top:0;width:2px;height:2px;overflow:hidden;z-index:0}
+#imgloader-box img{position:absolute;left:0;top:0;width:1px;height:1px}
