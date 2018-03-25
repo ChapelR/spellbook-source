@@ -105,6 +105,7 @@ $('#caption').ariaClick( function (e) {
         Dialog.open();
         $('#search').val('Search...');
     } else if (whatCaption('custom-view')) {
+        State.temporary.customEdit = null;
         setup.custom.dialog(true);
         $('#search').val('Search...');
     }

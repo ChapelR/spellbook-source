@@ -81,9 +81,14 @@
             _reportErrors\
         <</replace>>
     <<else>>
-        <<run setup.custom.create(_spellInfo)>>
-        <<run notify('Custom spell created.')>>
+        <<if _customEdit>>
+            <<run setup.custom.replaceSpell(_customEdit, setup.custom.createNoAdd(_spellInfo))>>
+            <<run notify('Custom spell created.')>>
+        <<else>>
+            <<run setup.custom.create(_spellInfo)>>
+            <<run notify('Custom spell created.')>>
+            <<run Engine.play('Custom')>>
+        <</if>>
         <<run Dialog.close()>>
-        <<run Engine.play('Custom')>>
     <</if>>
 <</button>></span>

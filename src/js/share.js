@@ -28,12 +28,11 @@ function decompressSpells (list) {
                 // a custom spell has been imported
                 var sv = State.variables,
                     has = fast.find(sv.custom, function (spellObj) {
-                        return Object.is(idx, spellObj);
+                        return spells.get.cleanText(idx.name) === spells.get.cleanText(spellObj.name);
                     });
                 if (has) {
-                    return has;
+                    return has; // use the current implementation of the spell
                 } else {
-                    idx.name = idx.name + ' (imported)';
                     fast.push(sv.custom, idx);
                     return idx;
                 }

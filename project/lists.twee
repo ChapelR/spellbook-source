@@ -34,29 +34,15 @@ Name:
 
 Tags: 
 <<textarea '_setTags' _defaults.tags>>
-<<if _bookToEdit>>\
-<span id='delete-button'><<button `'Delete [' + _defaults.name + ']'`>>
-    <<dialog 'Are you sure?'>>
-        Are you sure you want to delete <<= _defaults.name>>?
-        
-        @@float:left;<<button 'Yes'>>
-            <<run SpellList.del(_bookToEdit)>>
-            <<run Dialog.close()>>
-            <<run Engine.play(passage())>>
-        <</button>>@@@@float:right;<<button 'No'>>
-            <<popup 'Edit' 'Edit Spellbook' 'edit-book'>>
-        <</button>>@@
-    <</dialog>>
-<</button>></span>\
-<</if>>
+<span id='errorsBook'></span>
 <span id='enter-link' class='confirm-button'><<button 'Confirm'>>
     <<set _setName to _setName.trim()>>
     <<if !_setName>>
-        <<replace '#errors'>>//Please enter a name.//<</replace>>
+        <<replace '#errorsBook'>>//Please enter a name.//<</replace>>
     <<elseif _bookToEdit && _setName !== _inst.name && $listOfLists.includes(_setName)>>
-        <<replace '#errors'>>//That name is already in use.//<</replace>>
+        <<replace '#errorsBook'>>//That name is already in use.//<</replace>>
     <<elseif !_bookToEdit && $listOfLists.includes(_setName)>>
-        <<replace '#errors'>>//That name is already in use.//<</replace>>
+        <<replace '#errorsBook'>>//That name is already in use.//<</replace>>
     <<else>>
         <<if _setTags && _setTags.trim()>>
             <<set _setTags to _setTags.trim().split(' ')>>
@@ -84,4 +70,18 @@ Tags:
         <</if>>
     <</if>>
 <</button>></span>
-<span id='errors'></span>
+<<if _bookToEdit>>\
+<span id='delete-button'><<button `'Delete [' + _defaults.name + ']'`>>
+    <<dialog 'Are you sure?'>>
+        Are you sure you want to delete <<= _defaults.name>>?
+        
+        @@float:left;<<button 'Yes'>>
+            <<run SpellList.del(_bookToEdit)>>
+            <<run Dialog.close()>>
+            <<run Engine.play(passage())>>
+        <</button>>@@@@float:right;<<button 'No'>>
+            <<popup 'Edit' 'Edit Spellbook' 'edit-book'>>
+        <</button>>@@
+    <</dialog>>
+<</button>></span>\
+<</if>>

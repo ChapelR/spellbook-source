@@ -47,7 +47,7 @@ function createSpellDescription (spellObj) {
             });
         
         $delete = $(document.createElement('button'))
-            .addClass('w100-link delete-custom spell')
+            .addClass('w100-link delete-custom-spell')
             .attr('id', 'delete-button')
             .wiki('Delete.')
             .ariaClick({ label : 'Delete custom spell.' }, function () {
@@ -58,7 +58,17 @@ function createSpellDescription (spellObj) {
                 Dialog.open();
             });
         
-        $wrapper.append($delete).wiki('<br />');
+        // edit
+        $edit = $(document.createElement('button'))
+            .addClass('w100-link edit-custom-spell')
+            .wiki('Edit.')
+            .ariaClick({ label : 'Edit custom spell.' }, function () {
+                setup.custom.loadToEdit(spellObj);
+                setup.custom.dialog(true, true);
+                Dialog.open();
+            });
+        
+        $wrapper.append($edit).wiki('<br />').append($delete);
     }
     
     return $wrapper;

@@ -2,8 +2,62 @@
 
 State.variables.custom = [];
 
-function loadSpellForEditing () {
-    // todo: i need to clean up the maker for this to work... or fork it
+function loadSpellForEditing (spellObj) {
+    
+    var st = State.temporary;
+    st.customEdit = spellObj;
+    
+    $(document).one(':dialogopen', function () {
+        // the spell edit dialog is opened, but just to be sure
+        if (!$('#ui-dialog-body').hasClass('custom-spell-dialog')) {
+            return;
+        }
+        
+        // we need to assign every element the appropriate editing value:
+        setTimeout(function () {
+            // name
+            $('input[name="textbox--name"]').val(spellObj.name);
+            // classes
+            fast.forEach(spellObj.classes, function (className) {
+                var el = '#checkbox--' + spells.get.cleanText(className);
+                $(el).prop('checked', true);
+            });
+            // level
+            $('#dropdown--level').val(spellObj.level);
+            // components
+            if (spellObj.components.verbal) {
+                $('#checkbox--components0').prop('checked', true);
+            }
+            if (spellObj.components.somatic) {
+                $('#checkbox--components1').prop('checked', true);
+            }
+            if (spellObj.components.material) {
+                $('#checkbox--components2').prop('checked', true);
+                if (spellObj.components.materials_needed && spellObj.components.materials_needed[0]) {
+                    $('#textbox--components3').val(spellObj.components.materials_needed[0]);
+                }
+            }
+            // ritual
+            if (spellObj.ritual) {
+                $('#checkbox--ritual').prop('checked', true);
+            }
+            // cast time
+            $('input[name="var-action-cast-time"]').val(spellObj.casting_time);
+            // range
+            $('input[name="var-range-spell-range"]').val(spellObj.range);
+            // cast time
+            $('input[name="var-duration-duration"]').val(spellObj.duration);
+            // description
+            $('#textarea--descr').val(spellObj.description);
+            
+            // trigger everything
+            var toTrigger = $('#ui-dialog-body input').toArray().concat($('#ui-dialog-body textarea'));
+            fast.forEach(toTrigger, function (el) {
+                $(el).trigger('change');
+                $(el).trigger('input');
+            });
+        }, Engine.minDomActionDelay || 40);
+    });
 }
 
 function createCustomSpell ( obj /* object */ ) {
@@ -74,6 +128,32 @@ function customSpell (obj) {
     fast.push(State.variables.custom, newSpell);
 }
 
+function replaceExistingCustomSpell (oldSpellObj, newSpellObj) {
+    // find and replace existing custom spell across all instances
+    setup.loading.show();
+    var sv = State.variables;
+    
+    var target = fast.findIndex(sv.custom, function (spell) {
+        return (spell.name === oldSpellObj.name);
+    });
+    if (target > -1) {
+        sv.custom[target] = newSpellObj;
+    }
+    
+    fast.forEach(sv.lists, function (book) {
+        var replaceMe = fast.findIndex(book.spells, function (spell) {
+            return spell.name === oldSpellObj.name;
+        });
+        if (replaceMe > -1) {
+            book.spells[replaceMe] = newSpellObj;
+        }
+    });
+    
+    console.log(oldSpellObj, newSpellObj);
+    
+    Engine.play(passage());
+}
+
 function createSpellInterfaceText (storyVar /* string (story variable) */, listName /* string (slug) */, listOptions /* array */) {
     if (!storyVar || typeof storyVar !== 'string') {
         console.error('invalid storyVar in createSpellInterfaceText() -> ', storyVar);
@@ -141,8 +221,8 @@ function constructTextInputInterface () {
 
 // classes: checkboxes; level: dropdown; school: dropdown; components: checkbox + normal textbox; ritual: checkbox: these can go right in the dialog box
 
-function callCustomSetup (openDialog) {
-    Dialog.setup('Create Custom Spell', 'custom-spell-dialog');
+function callCustomSetup (openDialog, edit) {
+    Dialog.setup((edit ? 'Create Custom Spell' : 'Edit Custom Spell'), 'custom-spell-dialog');
     Dialog.wiki(Story.get('Custom Edit').text + '<br /><br />');
     Dialog.append(constructTextInputInterface());
     Dialog.wiki(Story.get('Custom Confirm').text);
@@ -152,9 +232,11 @@ function callCustomSetup (openDialog) {
 }
 
 setup.custom = {
-    debugCreate : createCustomSpell,
+    createNoAdd : createCustomSpell,
     create : customSpell,
     textInput : createSpellInterfaceText,
     buildTextInputs : constructTextInputInterface,
-    dialog : callCustomSetup
+    dialog : callCustomSetup,
+    loadToEdit : loadSpellForEditing,
+    replaceSpell : replaceExistingCustomSpell
 };
