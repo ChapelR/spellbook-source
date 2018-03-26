@@ -101,17 +101,14 @@ button#add-all.closed, button#remove-all.closed, button#select-all.closed {
 }
 
 html.light button#add-all, button#add-all, html.light button#remove-all, button#remove-all, html.light button#options-button, button#options-button, html.light button#select-all, button#select-all {
-    border-right: 0 !important;
     opacity: 0.8;
 }
 button#add-all, button#remove-all, button#options-button, button#select-all {
     background-color: #eee !important;
-    border-color: #111 !important;
     color: #111;
 }
 html.light button#add-all, html.light button#remove-all, html.light button#options-button, html.light button#select-all {
     background-color: #111 !important;
-    border-color: #eee !important;
 }
 
 button#add-all:hover, button#remove-all:hover, button#options-button:hover, button#select-all:hover {
@@ -122,7 +119,6 @@ button#add-all:hover, button#remove-all:hover, button#options-button:hover, butt
 
 html.light button#add-all:hover, html.light button#remove-all:hover, html.light button#options-button:hover, html.light button#select-all:hover {
     background-color: #9400d3 !important;
-    border-color: #eee !important;
 }
 html.light button#add-all:active, button#add-all:active, html.light button#remove-all:active, button#remove-all:active, html.light button#options-button:active, button#options-button:active, html.light button#select-all:active, button#select-all:active {
     background-color: #111 !important;
@@ -135,14 +131,8 @@ html.light button#add-all:active, button#add-all:active, html.light button#remov
     color: #eee;
 }
 html.light #options-button.active {
+    opacity: 1;
     background-color: #9400d3 !important;
-}
-#options-button.active:hover {
-    background-color: #79e !important;
-    color: #eee;
-}
-html.light #options-button.active:hover {
-    background-color: violet !important;
 }
 
 html.light .spell-wrapper {

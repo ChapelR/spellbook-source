@@ -1,7 +1,8 @@
 :: Share [dialog]
-Would you like to export or import spellbooks?
+What would you like to do?
 
 <span class='confirm-button'><<button [[Export]]>><<run Dialog.close()>><</button>>
+
 <<button [[Import]]>><<run Dialog.close()>><</button>></span>
 
 

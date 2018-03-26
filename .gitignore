@@ -50,3 +50,4 @@ node_modules/
 tweego.exe
 story-formats/
 build.bat
+dev-build.bat
