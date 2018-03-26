@@ -24,7 +24,6 @@ function decompressSpells (list) {
             if (typeof idx === 'number') {
                 return spells.list[idx];
             } else if (typeof idx === 'object' && idx.hasOwnProperty('name')) {
-                console.log(idx);
                 // a custom spell has been imported
                 var sv = State.variables,
                     has = fast.find(sv.custom, function (spellObj) {
@@ -33,6 +32,7 @@ function decompressSpells (list) {
                 if (has) {
                     return has; // use the current implementation of the spell
                 } else {
+                    // import the spell
                     fast.push(sv.custom, idx);
                     return idx;
                 }

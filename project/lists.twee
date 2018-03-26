@@ -67,6 +67,8 @@ Tags:
         <<if passage() === 'Lists' || passage() === 'Start'>>
             /% no need to force refresh in spell lists %/
             <<run Engine.play(passage())>>
+        <<elseif passage() === 'Import'>>
+            <<run Engine.play('Lists')>>
         <</if>>
     <</if>>
 <</button>></span>

@@ -14,7 +14,7 @@ var dir = 'assets/images/',
         'unchecked.svg'
     ];
 
-sourceList = fast.map(sourceList, function (src) { return dir + src });
+sourceList = fast.map(sourceList, function (src) { return dir + src; });
 
 $preloader
     .attr('id', 'imgloader-box')
@@ -22,7 +22,7 @@ $preloader
 
 function preload (sources) {
     if (sources && Array.isArray(sources) && sources.length) {
-        sources.forEach( function (src) {
+        fast.forEach(sources, function (src) {
             var $image = $(document.createElement('img'));
             $image
                 .attr('src', src)
@@ -44,7 +44,7 @@ setup.preloader = {
 };
 
 (function () { // ensure images are ready before playing
-    var ID = LoadScreen.lock()
+    var ID = LoadScreen.lock();
     preload(sourceList);
     LoadScreen.unlock(ID);
 }());

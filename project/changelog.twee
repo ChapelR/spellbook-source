@@ -9,15 +9,21 @@ THINGS TO IMPLEMENT BEFORE 1.0.0:
 AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
 
 %/\
+<<include 'Recent'>>
+<<include 'Log'>>
+
+:: Recent [dialog include]
 !!! 0.9.8: Beta patch 7
 * Custom spells are now fully editable.
 * Importing custom spells:
 ** When you import a spellbook that features a custom spell and a spell with the same name is already in your custom spell list, the imported custom spell will be discarded, and the one already saved in your custom spell list will be used instead.
 ** When you import a spellbook that features a custom spell and you don't have a spell with that name already in your list, that custom spell will be imported along with the spellbook and added to your spell lists.
 ** To the app, spells are considered to have the same name regardless of case, that is "{{{wish}}}", "{{{Wish}}}", and "{{{wIsH}}}" would all be considered the same name.  The app also cares about spacing only so far as it exists between words.  This means that "<<= '&nbsp;&nbsp;&nbsp;&nbsp;'>>{{{Magic Missile   }}}", "{{{Magic Missile}}}<<= '&nbsp;&nbsp;&nbsp;&nbsp;'>>", and "{{{Magic}}}<<= '&nbsp;&nbsp;&nbsp;&nbsp;'>>{{{Missile}}}" are all considered the same name.
+* Finishing up after importing a spellbook now takes the user to the Spellbook screen.
 * Adjusted the placement of some buttons and options.
 * Updated load screen.
 
+:: Log [dialog]
 !!! 0.9.7: Beta patch 6
 * Emergency update to get the advanced filters working again.
 
