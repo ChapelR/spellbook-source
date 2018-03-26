@@ -25,6 +25,10 @@
     background: url('assets/images/checked.svg');
 }
 
+.spell-wrapper:not(.checked) .selection:hover {
+    background-image: none !important;
+}
+
 .spell-wrapper {
     position: relative;
     padding: 1em;

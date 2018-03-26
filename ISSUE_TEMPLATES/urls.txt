@@ -1,0 +1,3 @@
+https://github.com/ChapelR/spellbook-source/issues/new?labels=Spell%20error.&template=spell-error.md
+https://github.com/ChapelR/spellbook-source/issues/new?labels=Missing%20spell.&template=missing-spell.md
+https://github.com/ChapelR/spellbook-source/issues/new?labels=bug&template=bugs.md
