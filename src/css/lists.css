@@ -9,7 +9,7 @@
     z-index: 3;
     background: url('assets/images/unchecked.svg');
     background-repeat: no-repeat;
-    background-color: #111;
+    background-color: #eee;
     content: '';
     display: block;
     width: 2em;
@@ -25,9 +25,6 @@
     background: url('assets/images/checked.svg');
 }
 
-.spell-wrapper:not(.checked) .selection:hover {
-    background-image: none !important;
-}
 
 .spell-wrapper {
     position: relative;
@@ -67,7 +64,7 @@
 
 /* these should go in a menu with 'select all' */
 
-button#add-all, button#remove-all {
+button#add-all, button#remove-all, button#options-button, button#select-all {
     display: block;
     position: fixed;
     z-index: 15;
@@ -75,35 +72,55 @@ button#add-all, button#remove-all {
     min-width: 10em;
     max-width: 10em;
 }
-button#add-all {
+button#add-all, button#remove-all, button#select-all {
+    -webkit-transition-duration : 0.3s;
+	-moz-transition-duration : 0.3s;
+	-o-transition-duration : 0.3s;
+	transition-duration : 0.3s;
+}
+button#options-button {
     top: 7.2em;
 }
-button#remove-all {
+button#select-all {
     top: 9.4em;
 }
+button#add-all {
+    top: 11.6em;
+}
+button#remove-all {
+    top: 13.8em;
+}
 
-button#add-all.closed, button#remove-all.closed {
+button#options-button.closed {
     display: none;
 }
 
-html.light button#add-all, button#add-all, html.light button#remove-all, button#remove-all {
+button#add-all.closed, button#remove-all.closed, button#select-all.closed {
+    right: -11em;
+}
+
+html.light button#add-all, button#add-all, html.light button#remove-all, button#remove-all, html.light button#options-button, button#options-button, html.light button#select-all, button#select-all {
     border-right: 0 !important;
     opacity: 0.8;
 }
-button#add-all, button#remove-all {
+button#add-all, button#remove-all, button#options-button, button#select-all {
     background-color: #eee !important;
     border-color: #111 !important;
     color: #111;
 }
-html.light button#add-all, html.light button#remove-all {
+html.light button#add-all, html.light button#remove-all, html.light button#options-button, html.light button#select-all {
     background-color: #111 !important;
     border-color: #eee !important;
 }
 
-html.light button#add-all:hover, button#add-all:hover, html.light button#remove-all:hover, button#remove-all:hover {
+html.light button#add-all:hover, button#add-all:hover, html.light button#remove-all:hover, button#remove-all:hover, html.light button#options-button:hover, button#options-button:hover, html.light button#select-all:hover, button#select-all:hover {
     background-color: #c55 !important;
     border-color: #eee !important;
     opacity: 1;
+}
+#options-button.active, html.light #options-button.active {
+    opacity: 1;
+    font-weight: bold;
 }
 
 html.light .spell-wrapper {

@@ -15,7 +15,7 @@ button {
 .spell-wrapper:active, .spell-wrapper.checked, .card:active, html.texture .spell-wrapper {
     box-shadow: none;
 }
-#add-all, #remove-all {
+#add-all, #remove-all, #select-all, #options-button {
     box-shadow: -1px 1px 6px #000;
 }
 
@@ -48,7 +48,7 @@ html.light button {
 html.light .spell-wrapper:active, html.light .spell-wrapper.checked, html.light .card:active {
     box-shadow: 0px 0px 3px #888;
 }
-html.light #add-all, html.light #remove-all {
+html.light #add-all, html.light #remove-all, html.light #select-all, html.light #options-button {
     box-shadow: -1px 1px 6px #888;
 }
 

@@ -255,9 +255,22 @@ $('#bottom-bar').append($search).hide();
 
 /* side options */
 
+var $options = $(document.createElement('button'))
+    .attr('id', 'options-button')
+    .addClass('closed')
+    .wiki('Options.')
+    .ariaClick({ label : 'More options.' }, function () {
+        if (State.variables.ctx) {
+            $('#remove-all').toggleClass('closed');
+        }
+        $('.opts').toggleClass('closed');
+        $(this).toggleClass('active');
+    })
+    .appendTo('#story');
+
 var $addAll = $(document.createElement('button')) 
     .attr('id', 'add-all')
-    .addClass('closed')
+    .addClass('opts closed')
     .wiki('Add all.')
     .ariaClick({ label : 'Add all the selected spells to a list.' }, function () {
         var st = State.temporary,
@@ -371,44 +384,84 @@ var $removeAll = $(document.createElement('button'))
     })
     .appendTo('#story');
 
+var $selectAll = $(document.createElement('button')) 
+    .attr('id', 'select-all')
+    .addClass('opts closed')
+    .wiki('Select all.')
+    .ariaClick({ label : 'Select or unselect all the current spells.' }, function () {
+        var st = State.temporary,
+            sv = State.variables,
+            inst, mainList,
+            spellsOnPage,
+            allCards;
+        if (sv.ctx) {
+            inst = SpellList.getByName(sv.ctx);
+            mainList = inst.spells;
+        } else {
+            inst = null;
+            mainList = setup.results;
+        }
+        spellsOnPage = (st.filtered && Array.isArray(st.filtered)) ? st.filtered : mainList;
+        
+        if (st.selectedSpells && Array.isArray(st.selectedSpells) && st.selectedSpells.length > 0) {
+            // unselect all
+            st.selectedSpells = [];
+            allCards = $('.spell-wrapper.checked').toArray();
+            fast.forEach(allCards, function (card) {
+                $(card).removeClass('checked');
+            });
+        } else {
+            st.selectedSpells = clone(spellsOnPage);
+            allCards = $('.spell-wrapper').not('.checked').toArray();
+            fast.forEach(allCards, function (card) {
+                $(card).addClass('checked');
+            });
+        }
+        $(document).trigger(':select-spell');
+    })
+    .appendTo('#story');
+
 function hideControls () {
+    $options.addClass('closed');
+    $options.removeClass('active');
     $addAll.addClass('closed');
     $removeAll.addClass('closed');
+    $selectAll.addClass('closed');
 }
 
 function showControls () {
     hideControls();
-    $addAll.removeClass('closed');
+    $options.removeClass('closed');
     $addAll.empty().wiki('Add all.');
-    if (State.variables.ctx) {
-        $removeAll.removeClass('closed');
-        $removeAll.empty().wiki('Remove all.');
-    }
+    $removeAll.empty().wiki('Remove all.');
+    $selectAll.empty().wiki('Select all.');
 }
-
-// todo: add remove all / remove selected
 
 /* checked system */
 $(document).on(':select-spell', function (e) {
     var pool = State.temporary.selectedSpells || [], 
         del;
-    if (e.selected) {
-        pool.push(e.spell);
-    } else {
-        del = fast.findIndex(pool, function (spell) {
-            return e.spell.name === spell.name;
-        });
-        pool.deleteAt(del);
+    if (e.spell) {
+        if (e.selected) {
+            pool.push(e.spell);
+        } else {
+            del = fast.findIndex(pool, function (spell) {
+                return e.spell.name === spell.name;
+            });
+            pool.deleteAt(del);
+        }
     }
     // update add all / remove all to add selected / remove selected
     if (pool.length < 1) {
         // add all and remove all
         $addAll.empty().wiki('Add all.');
         $removeAll.empty().wiki('Remove all.');
+        $selectAll.empty().wiki('Select all.');
     } else {
         // add selected and remove selected
         $addAll.empty().wiki('Add selected.');
         $removeAll.empty().wiki('Remove selected.');
+        $selectAll.empty().wiki('Clear all.');
     }
     State.temporary.selectedSpells = pool;
 });
