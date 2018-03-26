@@ -42,6 +42,13 @@ function fontHandler () {
     }
 }
 
+/* report bugs */
+function reportModal () {
+    Dialog.setup('Report Issues', 'issue-dialog');
+    Dialog.wiki(Story.get('Bugs').text);
+    Dialog.open();
+}
+
 /* reset */
 function resetApp () {
     var $yes = $(document.createElement('button'))
@@ -99,18 +106,23 @@ Setting.addList('fonts', {
     onChange : fontHandler
 });
 
-// reset application
+// add buttons
 Setting.addHeader('Reset App');
 $(document).on(':dialogopen', function () {
     setTimeout( function () {
         var $setting = $('#header-body-reset-app');
         if ($setting.length) {
+            var $report = $(document.createElement('button'))
+                .wiki('Report issue.')
+                .attr('id', 'bug-report-button')
+                .addClass('w100-link')
+                .ariaClick(reportModal);
             var $reset = $(document.createElement('button'))
                 .wiki('Reset Application')
                 .attr('id', 'reset-button')
                 .addClass('nuke')
                 .ariaClick(resetApp);
-            $setting.empty().append($reset);
+            $setting.empty().append($report).wiki('<br /><br />').append($reset);
         }
     }, Engine.minDomActionDelay);
 });

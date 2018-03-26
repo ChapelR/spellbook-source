@@ -11,3 +11,6 @@
 
   gtag('config', 'UA-116302247-1');
 </script>
+<script>
+    if("serviceWorker"in navigator)try{navigator.serviceWorker.controller||navigator.serviceWorker.register("sw.js",{scope:"./"})}catch(r){}
+</script>

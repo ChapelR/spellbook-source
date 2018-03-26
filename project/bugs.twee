@@ -1,0 +1,34 @@
+:: Bugs [dialog]
+
+Please select which kind of issue you'd like to report:
+
+<a target="_blank" href="https://github.com/ChapelR/spellbook-source/issues/new?labels=Spell%20error.&template=spell-error.md">@@.w100-link;<button>Error in spell.</button>@@</a>
+<a target="_blank" href="https://github.com/ChapelR/spellbook-source/issues/new?labels=Missing%20spell.&template=missing-spell.md">@@.w100-link;<button>Missing SRD spell.</button>@@</a>
+<span class='w100-link'><<button 'Found a bug.'>>
+    <<set _bugCode to "```\n" + Save.serialize({ 'userReport' : true }) + "\n```">>
+    <<run $(document).one(':dialogopen', function () {
+        if (!$('#ui-dialog-body').hasClass('bug-report')) {
+            return;
+        }
+        setTimeout(function () {
+            $('#bug-report').empty().append(State.temporary.bugCode);
+        }, Engine.minDomActionDelay || 40)
+    })>>
+    <<dialog 'Report Bug' 'bug-report'>>
+        Please copy this state code and paste it into the issue form.
+        
+        When you're ready, click the {{{[Report bug.]}}} button.
+        
+        ''State code:''
+        <textarea id='bug-report' readonly></textarea>
+        
+        <span class='w100-link'><<button 'Select All'>>
+            <<run $('#bug-report').select()>> 
+        <</button>>
+        <<button 'Copy to Clipboard'>>
+            <<run $('#bug-report').select()>>
+            <<run document.execCommand('copy')>>
+        <</button>></span>
+        <a  target="_blank" href="https://github.com/ChapelR/spellbook-source/issues/new?labels=bug&template=bugs.md">@@.w100-link;<button>Report bug.</button>@@</a>
+    <</dialog>>
+<</button>></span>

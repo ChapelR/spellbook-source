@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     minify = require('gulp-minify-css'),
     replace = require('gulp-replace'),
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    swPrecache = require('sw-precache');
 
 // vendor
 
@@ -75,7 +76,18 @@ function lint () {
         .pipe(jshint.reporter('default', { beep : true }));
 }
 
+// service workers
+var dir = 'dist';
+
+function serviceWorkers (callback) {
+    swPrecache.write(`${dir}/sw.js`, {
+        staticFileGlobs: [dir + '/**/*.{js,html,css,png,jpg,json,svg,ico,ttf}'],
+        stripPrefix: dir
+    }, callback);
+}
+
 // tasks
 
 gulp.task('build', build);
+gulp.task('swjs', serviceWorkers);
 gulp.task('lint', lint);

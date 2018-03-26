@@ -426,4 +426,9 @@ $(document).on('keyup', function (e) {
             LoadScreen.hide();
         }
     }
+    if (e.shiftKey && e.ctrlKey && e.which == 32) { // ctrl + shift + space 
+        Dialog.setup('Report Issues', 'issue-dialog');
+        Dialog.wiki(Story.get('Bugs').text);
+        Dialog.open();
+    }
 });

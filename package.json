@@ -13,11 +13,12 @@
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "sw-precache": "^5.2.1"
+  },
   "scripts": {
     "test": "gulp lint",
     "lint": "gulp lint",
-    "build": "gulp build && tweego --head=src\HEAD.html -o dist\index.html project",
     "minify": "gulp build"
   },
   "repository": {
