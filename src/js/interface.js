@@ -221,6 +221,10 @@ var $search = $(document.createElement('input'))
         var result = spells.get.byName(term, st.cache);
         st.filtered = result;
         
+        // reset selected spells
+        st.selectedSpells = [];
+        $(document).trigger(':select-spell');
+        
         if (result.length > 0) {
             if (inst && sv.ctx) {
                 $('#results').empty().append(spells.render.listAll(result, inst));

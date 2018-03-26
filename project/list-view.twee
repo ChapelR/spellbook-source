@@ -71,6 +71,8 @@
 <span id='space-link' class='w100-link'><<button 'Confirm'>>
     /% reset search term cache %/
     <<set _termFiltered to false>>
+    <<set _selectedSpells to []>>
+    <<run $(document).trigger(':select-spell')>>
     
     <<if $ctx>>
         <<set _filtered to clone(_list.spells)>>
