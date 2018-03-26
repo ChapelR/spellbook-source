@@ -24,7 +24,7 @@
         </span> -->
     </div>
 </div>
-<div id='caption'>
+<div id='caption' tabindex='0' role='button'>
     <div id='caption-text'></div>
     <div id='caption-link'></div>
 </div>

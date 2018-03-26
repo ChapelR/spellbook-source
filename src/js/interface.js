@@ -87,29 +87,44 @@ function whatCaption (cls) {
     return (setup.caption.$el.hasClass(cls));
 }
 
+function description () {
+    if (whatCaption('spells')) {
+        return 'Create a new spellbook.';
+    } 
+    if (whatCaption('list-view')) {
+        return 'Filter results.';
+    } 
+    if (whatCaption('custom-view')) {
+        return 'Create a custom spell.';
+    } 
+    return 'More options.';
+}
+
 /* caption listener */
-$('#caption').ariaClick( function (e) {
-    
-    // menu handler
-    if (whatCaption('search')) {
-        Engine.play('Start');
-    } else if (whatCaption('spells')) {
-        State.temporary.bookToEdit = false;
-        State.temporary.spellToAdd = false;
-        Dialog.setup('New Spellbook', 'new-book');
-        Dialog.wiki(Story.get('Edit').text);
-        Dialog.open();
-    } else if (whatCaption('list-view')) {
-        Dialog.setup('Filter', 'list-view-filter');
-        Dialog.wiki(Story.get('Filter').text);
-        Dialog.open();
-        $('#search').val('Search...');
-    } else if (whatCaption('custom-view')) {
-        State.temporary.customEdit = null;
-        setup.custom.dialog(true);
-        $('#search').val('Search...');
-    }
-});
+postdisplay['set-caption'] = function () {
+    $('#caption').off().ariaClick({ label : description() } ,function (e) {
+        
+        // menu handler
+        if (whatCaption('search')) {
+            Engine.play('Start');
+        } else if (whatCaption('spells')) {
+            State.temporary.bookToEdit = false;
+            State.temporary.spellToAdd = false;
+            Dialog.setup('New Spellbook', 'new-book');
+            Dialog.wiki(Story.get('Edit').text);
+            Dialog.open();
+        } else if (whatCaption('list-view')) {
+            Dialog.setup('Filter', 'list-view-filter');
+            Dialog.wiki(Story.get('Filter').text);
+            Dialog.open();
+            $('#search').val('Search...');
+        } else if (whatCaption('custom-view')) {
+            State.temporary.customEdit = null;
+            setup.custom.dialog(true);
+            $('#search').val('Search...');
+        }
+    });
+};
 
 /*    KEYBOARD CONTROLS    */
 

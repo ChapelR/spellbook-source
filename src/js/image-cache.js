@@ -25,7 +25,10 @@ function preload (sources) {
         fast.forEach(sources, function (src) {
             var $image = $(document.createElement('img'));
             $image
-                .attr('src', src)
+                .attr({
+                    'src' : src,
+                    'alt' : ''
+                })
                 .appendTo($preloader);
         });
     }

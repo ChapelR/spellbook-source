@@ -12,6 +12,13 @@ AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
 <<include 'Log'>>
 
 :: Recent [dialog include]
+!!! 0.9.9: Beta patch 8
+* Added PWA support.  You can now install this web app as a PWA using certain browsers to use the app offline.
+* Performance improvements.
+* Added a bug report system in the settings menu for reporting bugs in the app, errors in the spell descriptions, and missing spells.
+* Fixed some spell descriptions.
+
+:: Log [dialog]
 !!! 0.9.8: Beta patch 7
 * Custom spells are now fully editable.
 * Importing custom spells:
@@ -23,7 +30,6 @@ AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
 * Adjusted the placement of some buttons and options.
 * Updated load screen.
 
-:: Log [dialog]
 !!! 0.9.7: Beta patch 6
 * Emergency update to get the advanced filters working again.
 
