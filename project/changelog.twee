@@ -14,7 +14,11 @@ AT 1.0.0, WRAP BETA PATCHES IN <<MESSAGE>>.
 :: Recent [dialog include]
 !!! 0.9.9: Beta patch 8
 * Added PWA support.  You can now install this web app as a PWA using certain browsers to use the app offline.
-* Performance improvements.
+** All assets used by the app are now cached the first time the app is loaded, meaning faster load times across the board.
+** Users can install the app on their phones and computers by using the {{{Add to Homescreen}}} or {{{Add to Desktop}}} options in their browsers, provided the browser supports it.  Doing so gives the app a handful of advantages, particularly with regard to performance and appearance.
+** Not all browsers currently support all facets of PWAs, but most modern browsers are working on implementations.
+* Added a select / unselect all option and updated the left-side option button layout.
+* General performance improvements.
 * Added a bug report system in the settings menu for reporting bugs in the app, errors in the spell descriptions, and missing spells.
 * Fixed some spell descriptions.
 

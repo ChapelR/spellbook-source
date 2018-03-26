@@ -258,7 +258,7 @@ $('#bottom-bar').append($search).hide();
 var $options = $(document.createElement('button'))
     .attr('id', 'options-button')
     .addClass('closed')
-    .wiki('Options.')
+    .wiki('+')
     .ariaClick({ label : 'More options.' }, function () {
         if (State.variables.ctx) {
             $('#remove-all').toggleClass('closed');
@@ -403,21 +403,25 @@ var $selectAll = $(document.createElement('button'))
         }
         spellsOnPage = (st.filtered && Array.isArray(st.filtered)) ? st.filtered : mainList;
         
-        if (st.selectedSpells && Array.isArray(st.selectedSpells) && st.selectedSpells.length > 0) {
-            // unselect all
-            st.selectedSpells = [];
-            allCards = $('.spell-wrapper.checked').toArray();
-            fast.forEach(allCards, function (card) {
-                $(card).removeClass('checked');
-            });
+        if (spellsOnPage && Array.isArray(spellsOnPage) && spellsOnPage.length > 0) {
+            if (st.selectedSpells && Array.isArray(st.selectedSpells) && st.selectedSpells.length > 0) {
+                // unselect all
+                st.selectedSpells = [];
+                allCards = $('.spell-wrapper.checked').toArray();
+                fast.forEach(allCards, function (card) {
+                    $(card).removeClass('checked');
+                });
+            } else {
+                st.selectedSpells = clone(spellsOnPage);
+                allCards = $('.spell-wrapper').not('.checked').toArray();
+                fast.forEach(allCards, function (card) {
+                    $(card).addClass('checked');
+                });
+            }
+            $(document).trigger(':select-spell');
         } else {
-            st.selectedSpells = clone(spellsOnPage);
-            allCards = $('.spell-wrapper').not('.checked').toArray();
-            fast.forEach(allCards, function (card) {
-                $(card).addClass('checked');
-            });
+            notify('No spells...');
         }
-        $(document).trigger(':select-spell');
     })
     .appendTo('#story');
 
