@@ -1,9 +1,9 @@
 // version
 setup.version = {
-    number : 908, // number used to check for update logs
+    number : 909, // number used to check for update logs
     major : 0,
     minor : 9,
-    patch : 8,
+    patch : 9,
     suffix : function () { return (this.major < 1) ? ' - beta' : ''; },
     string : function () { return String(this.major + '.' + this.minor + '.' + this.patch + this.suffix() ); }
 };

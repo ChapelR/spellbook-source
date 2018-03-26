@@ -69,13 +69,8 @@ button#add-all, button#remove-all, button#options-button, button#select-all {
     position: fixed;
     z-index: 15;
     right: 0;
-}
-button#add-all, button#remove-all, button#select-all {
     min-width: 10em;
     max-width: 10em;
-}
-button#options-button {
-    min-width: 2em;
 }
 button#add-all, button#remove-all, button#select-all {
     -webkit-transition-duration : 0.3s;
@@ -85,6 +80,7 @@ button#add-all, button#remove-all, button#select-all {
 }
 button#options-button {
     top: 7.2em;
+    font-weight: bold;
 }
 button#select-all {
     top: 9.4em;
@@ -118,18 +114,35 @@ html.light button#add-all, html.light button#remove-all, html.light button#optio
     border-color: #eee !important;
 }
 
-html.light button#add-all:hover, button#add-all:hover, html.light button#remove-all:hover, button#remove-all:hover, html.light button#options-button:hover, button#options-button:hover, html.light button#select-all:hover, button#select-all:hover {
-    background-color: #c55 !important;
-    border-color: #eee !important;
+button#add-all:hover, button#remove-all:hover, button#options-button:hover, button#select-all:hover {
+    background-color: #35a !important;
+    color: #eee;
     opacity: 1;
+}
+
+html.light button#add-all:hover, html.light button#remove-all:hover, html.light button#options-button:hover, html.light button#select-all:hover {
+    background-color: #9400d3 !important;
+    border-color: #eee !important;
 }
 html.light button#add-all:active, button#add-all:active, html.light button#remove-all:active, button#remove-all:active, html.light button#options-button:active, button#options-button:active, html.light button#select-all:active, button#select-all:active {
     background-color: #111 !important;
     opacity: 1;
+    color: #eee;
 }
-#options-button.active, html.light #options-button.active {
+#options-button.active {
     opacity: 1;
-    font-weight: bold;
+    background-color: #35a !important;
+    color: #eee;
+}
+html.light #options-button.active {
+    background-color: #9400d3 !important;
+}
+#options-button.active:hover {
+    background-color: #79e !important;
+    color: #eee;
+}
+html.light #options-button.active:hover {
+    background-color: violet !important;
 }
 
 html.light .spell-wrapper {

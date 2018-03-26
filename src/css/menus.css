@@ -105,6 +105,8 @@
 #version {
     float: right;
     color: lime;
+    font-family: monospace,monospace;
+    font-size: 1em;
 }
 
 input[type=text], select {

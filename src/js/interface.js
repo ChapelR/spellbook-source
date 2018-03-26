@@ -260,11 +260,17 @@ var $options = $(document.createElement('button'))
     .addClass('closed')
     .wiki('+')
     .ariaClick({ label : 'More options.' }, function () {
+        var $me = $(this);
         if (State.variables.ctx) {
             $('#remove-all').toggleClass('closed');
         }
         $('.opts').toggleClass('closed');
-        $(this).toggleClass('active');
+        $me.toggleClass('active');
+        if ($me.hasClass('active')) {
+            $me.empty().wiki('&#8212;');
+        } else {
+            $me.empty().wiki('+');
+        }
     })
     .appendTo('#story');
 
@@ -426,8 +432,11 @@ var $selectAll = $(document.createElement('button'))
     .appendTo('#story');
 
 function hideControls () {
-    $options.addClass('closed');
-    $options.removeClass('active');
+    $options
+        .addClass('closed')
+        .removeClass('active')
+        .empty()
+        .wiki('+');
     $addAll.addClass('closed');
     $removeAll.addClass('closed');
     $selectAll.addClass('closed');
